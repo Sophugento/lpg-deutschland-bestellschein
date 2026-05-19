@@ -27,7 +27,7 @@ export default function ProductRow({ product, qty, onChange }: Props) {
   const { paid, free } = product.promoEligible ? promoFn(qty) : { paid: qty, free: 0 };
   const lineTotal = paid * product.price;
   const hasPromo = free > 0;
-  const showMinWarning = product.promoEligible && product.type === "revente" && qty > 0 && qty < 3;
+  const showMinWarning = false;
 
   return (
     <div
