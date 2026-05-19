@@ -3,18 +3,11 @@
 import { useState, useMemo } from "react";
 import { calcPromoRevente, calcPromoCabine } from "@/lib/utils";
 import { T } from "@/lib/i18n";
-import { Product, Offer } from "@/data/products";
-import { ProductInfo } from "@/data/productInfo";
+import { Catalog } from "@/lib/catalog";
 import CategorySection from "@/components/CategorySection";
 import OfferRow from "@/components/OfferRow";
 import OrderBar from "@/components/OrderBar";
 import OrderModal from "@/components/OrderModal";
-
-interface Catalog {
-  products: Product[];
-  offers: Offer[];
-  productInfo: Record<string, ProductInfo>;
-}
 
 interface Props {
   catalog: Catalog;

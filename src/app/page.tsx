@@ -1,7 +1,9 @@
-import { PRODUCTS, OFFERS } from "@/data/products";
-import { PRODUCT_INFO } from "@/data/productInfo";
+import { getCatalog } from "@/lib/catalog";
 import OrderForm from "@/components/OrderForm";
 
-export default function Home() {
-  return <OrderForm catalog={{ products: PRODUCTS, offers: OFFERS, productInfo: PRODUCT_INFO }} />;
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const catalog = await getCatalog();
+  return <OrderForm catalog={catalog} />;
 }

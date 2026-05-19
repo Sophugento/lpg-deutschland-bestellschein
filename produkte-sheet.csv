@@ -1,0 +1,106 @@
+Réf.,Nom,Type,Contenant,Prix EUR (HT),Prix vente EUR,Catégorie,Sous-catégorie,Promo éligible
+102435100,BODY SHAPING GEL,revente,200 ml,34.5,69,Körper,Volumenreduzierung,TRUE
+102435200,BODY SHAPING GEL,professionnel,400 ml,60.95,,Körper,Volumenreduzierung,TRUE
+102432100,BODY SHAPING CREAM,revente,200 ml,34.5,69,Körper,Volumenreduzierung,TRUE
+102432600,BODY SHAPING CREAM,professionnel,400 ml,60.95,,Körper,Volumenreduzierung,TRUE
+102486300,ANTI-CELLULITE CREAM-IN-GEL,revente,200 ml,35,70,Körper,Cellulite,TRUE
+102486400,ANTI-CELLULITE CREAM-IN-GEL,professionnel,400 ml,60.95,,Körper,Cellulite,TRUE
+102488900,ANTI-CELLULITE INTENSIVE SERUM,revente,100 ml,41,82,Körper,Cellulite,TRUE
+102489000,ANTI-CELLULITE INTENSIVE SERUM,professionnel,200 ml,60.95,,Körper,Cellulite,TRUE
+102441500,RESURFACING CREAM,revente,200 ml,34.5,69,Körper,Anti-Aging,TRUE
+102441600,RESURFACING CREAM,professionnel,400 ml,60.95,,Körper,Anti-Aging,TRUE
+102487100,FIRMING SHAPING CREAM,revente,200 ml,35,70,Körper,Anti-Aging,TRUE
+102487200,FIRMING SHAPING CREAM,professionnel,400 ml,60.95,,Körper,Anti-Aging,TRUE
+102488400,EXPERT STRETCH MARK OIL,revente,100 ml,34.5,69,Körper,Wohlbefinden,TRUE
+102503400,EXPERT STRETCH MARK OIL,professionnel,100 ml,31.6,,Körper,Wohlbefinden,TRUE
+102689001,CRYO MASSAGE BALM,professionnel,500 ml,87.4,,Körper,Wohlbefinden,TRUE
+102501000,EXPERT CLEANSING BALM,revente,100 ml,24.5,49,Gesicht,Reinigen & Vorbereiten,TRUE
+102501100,EXPERT CLEANSING BALM,professionnel,200 ml,43.7,,Gesicht,Reinigen & Vorbereiten,TRUE
+102435400,PREPARING MICELLAR WATER,revente,200 ml,16,32,Gesicht,Reinigen & Vorbereiten,TRUE
+102435501,PREPARING MICELLAR WATER,professionnel,400 ml,35.65,,Gesicht,Reinigen & Vorbereiten,TRUE
+102434301,EXFOLIATING CREAM,revente,75 ml,20.7,41.4,Gesicht,Reinigen & Vorbereiten,TRUE
+102434401,EXFOLIATING CREAM,professionnel,200 ml,43.7,,Gesicht,Reinigen & Vorbereiten,TRUE
+102501500,ACTIVE REPLENISHING ESSENCE,revente,200 ml,26.5,53,Gesicht,Reinigen & Vorbereiten,TRUE
+102501600,ACTIVE REPLENISHING ESSENCE,professionnel,400 ml,46,,Gesicht,Reinigen & Vorbereiten,TRUE
+102589600,MICRO EXFOLIATING SILKY POWDER,revente,50 g,21.85,43.7,Gesicht,Reinigen & Vorbereiten,TRUE
+102339400,LPG PEELING TECHNOLOGY 20%,professionnel,,44.85,,Gesicht,Reinigen & Vorbereiten,TRUE
+102444500,SMOOTHING FILLER MILK SERUM,revente,30 ml,50.3,100.6,Gesicht,Serum,TRUE
+102444600,SMOOTHING FILLER MILK SERUM,professionnel,100 ml,81.65,,Gesicht,Serum,TRUE
+102502000,OIL-IN-WATER REPLENISHING SERUM,revente,30 ml,41.4,82.8,Gesicht,Serum,TRUE
+102502100,OIL-IN-WATER REPLENISHING SERUM,professionnel,100 ml,67.85,,Gesicht,Serum,TRUE
+102499000,FIRMING LIFT SERUM,revente,30 ml,55,110,Gesicht,Serum,TRUE
+102499100,FIRMING LIFT SERUM,professionnel,100 ml,109,,Gesicht,Serum,TRUE
+102442600,SMOOTHING FILLER CREAM,revente,50 ml,48.6,97.2,Gesicht,Tages-/Nachtcremes,TRUE
+102442700,SMOOTHING FILLER CREAM,professionnel,200 ml,79.35,,Gesicht,Tages-/Nachtcremes,TRUE
+102443700,SMOOTHING FILLER GEL-CREAM,revente,50 ml,48.3,96.6,Gesicht,Tages-/Nachtcremes,TRUE
+102443800,SMOOTHING FILLER GEL-CREAM,professionnel,200 ml,78.1,,Gesicht,Tages-/Nachtcremes,TRUE
+102503000,DYNAMIC REPLENISHING GEL CREAM,revente,50 ml,38.8,77.6,Gesicht,Tages-/Nachtcremes,TRUE
+102503100,DYNAMIC REPLENISHING GEL CREAM,professionnel,200 ml,60.95,,Gesicht,Tages-/Nachtcremes,TRUE
+102589100,DYNAMIC REPLENISHING RICH CREAM,revente,50 ml,39.1,78.2,Gesicht,Tages-/Nachtcremes,TRUE
+102589200,DYNAMIC REPLENISHING RICH CREAM,professionnel,200 ml,63.25,,Gesicht,Tages-/Nachtcremes,TRUE
+102589400,DYNAMIC REPLENISHING CRYO MASK,revente,75 ml,27,54,Gesicht,Tages-/Nachtcremes,TRUE
+102595400,DYNAMIC REPLENISHING CRYO MASK,professionnel,200 ml,54,,Gesicht,Tages-/Nachtcremes,TRUE
+102498000,FIRMING LIFT CREAM,revente,50 ml,52.5,105,Gesicht,Tages-/Nachtcremes,TRUE
+102498100,FIRMING LIFT CREAM,professionnel,200 ml,82.8,,Gesicht,Tages-/Nachtcremes,TRUE
+102726000,ANTI-FATIGUE REGENERATING NIGHT CREAM,revente,50 ml,45.5,91,Gesicht,Tages-/Nachtcremes,TRUE
+102823000,ANTI-FATIGUE REGENERATING NIGHT CREAM,recharge,50 ml,40,,Gesicht,Tages-/Nachtcremes,FALSE
+102726200,RESURFACING GLYCOLIC NIGHT CREAM,revente,50 ml,45.5,91,Gesicht,Tages-/Nachtcremes,TRUE
+102822900,RESURFACING GLYCOLIC NIGHT CREAM,recharge,50 ml,40,,Gesicht,Tages-/Nachtcremes,FALSE
+102446300,EYE CREAM,revente,15 ml,36.6,73.2,Gesicht,Augen & Lippen,TRUE
+102446400,EYE CREAM,professionnel,75 ml,58.65,,Gesicht,Augen & Lippen,TRUE
+102504000,EYE BALM,revente,15 ml,28.7,57.4,Gesicht,Augen & Lippen,TRUE
+102504100,EYE BALM,professionnel,75 ml,46,,Gesicht,Augen & Lippen,TRUE
+102500000,EYE LIFT TREATMENT,revente,15 ml,40.2,80.4,Gesicht,Augen & Lippen,TRUE
+102500100,EYE LIFT TREATMENT,professionnel,15 ml,29.3,,Gesicht,Augen & Lippen,TRUE
+102164301,POST-TREATMENT EYE CONTOUR MASK,revente,,9.2,18.4,Gesicht,Augen & Lippen,TRUE
+102700700,BIO CELLULOSE POST-CARE LIP MASKS,professionnel,x10,87.5,,Gesicht,Augen & Lippen,TRUE
+102700800,CELLULAR DEFENSE UV+ FLUID SPF50+,revente,30 ml,28.7,57.4,Gesicht,Schützen,TRUE
+102700900,CELLULAR DEFENSE UV+ FLUID SPF50+,professionnel,30 ml,23,,Gesicht,Schützen,TRUE
+102700300,REGENERATING HAND CREAM,revente,75 ml,21.85,43.7,Gesicht,Hände,TRUE
+102700400,REGENERATING HAND CREAM,professionnel,75 ml,18.4,,Gesicht,Hände,TRUE
+102569900,POST-CARE COLLAGEN MASK,professionnel,x10,123.7,,Gesicht,Hände,TRUE
+102588900,POST-CARE V-LIFT MASK,professionnel,x10,103.5,,Gesicht,Hände,TRUE
+102760900,KIT PRO POST-TREATMENT HAND MASK,professionnel,,104,,Gesicht,Hände,TRUE
+102726500,ORANGE PEEL NO MORE,revente,182 g,32.2,64.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102689101,FLUID MOBILISING CONCENTRATE,revente,140 g,24.7,49.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102433100,VITALITY BOOSTER,revente,56 Kapseln,24.7,49.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102433001,FAT-BURNING CONCENTRATE,revente,56 Kapseln,25.5,51,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102448100,HYALURONIC ACID,revente,28 Kapseln,24.7,49.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102650400,COLLAGEN,revente,140 g,27.6,55.2,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102448200,"OMEGAS 3,6,9",revente,56 Kapseln,24.7,49.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102359502,EXPRESS BIO-SLIMMING TEA,revente,28 Teebeutel,15.6,31.2,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102725901,SOS FAT & SUGAR CONTROL,revente,10 Sticks,13,26,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102811900,STRESS & SLEEP COMPLEX,revente,56 Kapseln,24.7,49.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102765000,APPETITE CONTROL,revente,56 Kapseln,32.2,64.4,Nahrungsergänzungsmittel,Nahrungsergänzungsmittel,TRUE
+102211902,ENDERMOWEAR WEISS — Gr. M,professionnel,Gr. M,16.1,,Material-Bedarf,Material-Bedarf,FALSE
+102212002,ENDERMOWEAR WEISS — Gr. L,professionnel,Gr. L,16.1,,Material-Bedarf,Material-Bedarf,FALSE
+102212102,ENDERMOWEAR WEISS — Gr. XL,professionnel,Gr. XL,16.1,,Material-Bedarf,Material-Bedarf,FALSE
+102212602,ENDERMOWEAR WEISS — Gr. XXL,professionnel,Gr. XXL,16.1,,Material-Bedarf,Material-Bedarf,FALSE
+102209800,ENDERMOWEAR MEN - GRAU,professionnel,,15.5,,Material-Bedarf,Material-Bedarf,FALSE
+101727202,KIT ENDERMOLOGIE — LIFT 10 ET 20,professionnel,,17.8,,Material-Bedarf,Material-Bedarf,FALSE
+102260600,BOX 6x FILTER,professionnel,,59,,Material-Bedarf,Material-Bedarf,FALSE
+1001735,LIEGENAUFLAGE (ROLLE),professionnel,x6,33,,Material-Bedarf,Material-Bedarf,FALSE
+102593300,LPG SHOPPING BAGS LARGE,professionnel,x10,18,,Material-Bedarf,Material-Bedarf,FALSE
+102593200,LPG SHOPPING BAGS SMALL,professionnel,x10,15,,Material-Bedarf,Material-Bedarf,FALSE
+101890000,SCHWARZE TUNIKA — S/36,professionnel,S/36,71,,Textilien,Bekleidung,FALSE
+101890100,SCHWARZE TUNIKA — M/38,professionnel,M/38,71,,Textilien,Bekleidung,FALSE
+101980200,SCHWARZE TUNIKA — L/40,professionnel,L/40,71,,Textilien,Bekleidung,FALSE
+101980300,SCHWARZE TUNIKA — XL/42,professionnel,XL/42,71,,Textilien,Bekleidung,FALSE
+102240600,WEISSE TUNIKA — S/36,professionnel,S/36,71,,Textilien,Bekleidung,FALSE
+102240800,WEISSE TUNIKA — M/38,professionnel,M/38,71,,Textilien,Bekleidung,FALSE
+102240900,WEISSE TUNIKA — L/40,professionnel,L/40,71,,Textilien,Bekleidung,FALSE
+102241100,WEISSE TUNIKA — XL/42,professionnel,XL/42,71,,Textilien,Bekleidung,FALSE
+1015575,POLO — S,professionnel,S,32,,Textilien,Bekleidung,FALSE
+1015576,POLO — M,professionnel,M,32,,Textilien,Bekleidung,FALSE
+1015577,POLO — L,professionnel,L,32,,Textilien,Bekleidung,FALSE
+1015578,POLO — XL,professionnel,XL,32,,Textilien,Bekleidung,FALSE
+1016938,BADEMANTEL 100% BAUMWOLLE — M,professionnel,M,70,,Textilien,Bekleidung,FALSE
+1016939,BADEMANTEL 100% BAUMWOLLE — L,professionnel,L,70,,Textilien,Bekleidung,FALSE
+1016940,BADEMANTEL 100% BAUMWOLLE — XL,professionnel,XL,70,,Textilien,Bekleidung,FALSE
+101967800,LPG BADGE,professionnel,,5,,Textilien,Accessoires,FALSE
+1016942,DRAP / TUCH,professionnel,90x195cm,58,,Textilien,Accessoires,FALSE
+1017763,TONGS / FLIP FLOPS,professionnel,Unisize,2,,Textilien,Accessoires,FALSE
+102635600,ENDERMOTABLE PREMIUM,professionnel,L186/l72/H68-96cm,3880,,Mobilier,Mobilier,FALSE
+102485600,STANDARD LIEGE,professionnel,L197/l80/H62.5-90cm,1900,,Mobilier,Mobilier,FALSE
+101771301,MOBICUBE,professionnel,L57/l54/H53cm,730,,Mobilier,Mobilier,FALSE
+101771801,MOBICUBE XL,professionnel,L59/l53/H197cm,1145,,Mobilier,Mobilier,FALSE
