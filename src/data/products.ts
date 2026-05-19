@@ -1266,4 +1266,23 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const OFFERS: Offer[] = [];
+export const OFFERS: Offer[] = [
+  {
+    id: "regenerating",
+    nameFr: 'Angebot Gesicht "REGENERATING"',
+    nameDe: 'Angebot Gesicht "REGENERATING"',
+    price: 222,
+    description:
+      "4x ANTI-FATIGUE REGENERATING NIGHT CREAM + 1 RECHARGE REGENERATING ENHANCING NIGHT CREAM",
+    gift: "1x SET MIT 4 GESICHTSMASSAGE-TOOLS",
+  },
+  {
+    id: "resurfacing",
+    nameFr: 'Angebot Gesicht "RESURFACING"',
+    nameDe: 'Angebot Gesicht "RESURFACING"',
+    price: 222,
+    description:
+      "4x RESURFACING GLYCOLIC NIGHT CREAM + 1 RECHARGE RESURFACING GLYCOLIC NIGHT CREAM",
+    gift: "1x SET MIT 4 GESICHTSMASSAGE-TOOLS",
+  },
+];
