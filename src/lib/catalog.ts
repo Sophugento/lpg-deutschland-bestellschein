@@ -17,20 +17,27 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}") + 1;
   const table: GvizTable = JSON.parse(text.slice(start, end)).table;
-  const labels = table.cols.map((c) => {
+  let labels = table.cols.map((c) => {
     const label = c.label.trim();
     const markerIdx = label.indexOf(" 📌");
     return markerIdx >= 0 ? label.slice(0, markerIdx) : label;
   });
-  return table.rows
-    .filter((row) => row !== null && row.c !== null)
-    .map((row) => {
-      const obj: Record<string, unknown> = {};
-      row!.c.forEach((cell, i) => {
-        obj[labels[i]] = cell?.v ?? "";
-      });
-      return obj;
+
+  const dataRows = table.rows.filter((row) => row !== null && row.c !== null);
+
+  // Excel imports leave col labels empty — use first data row as header instead
+  if (labels.every((l) => l === "") && dataRows.length > 0) {
+    labels = dataRows[0]!.c.map((cell) => String(cell?.v ?? "").trim());
+    dataRows.shift();
+  }
+
+  return dataRows.map((row) => {
+    const obj: Record<string, unknown> = {};
+    row!.c.forEach((cell, i) => {
+      obj[labels[i]] = cell?.v ?? "";
     });
+    return obj;
+  });
 }
 
 function str(v: unknown): string {
