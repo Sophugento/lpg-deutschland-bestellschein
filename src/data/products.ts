@@ -1311,7 +1311,7 @@ export const PRODUCTS: Product[] = [
     promoEligible: false,
   },
   {
-    ref: "102253801",
+    ref: "102253800",
     nameFr: "INFINITY TH 50 IW HEAD FLAPS",
     nameDe: "INFINITY TH 50 IW HEAD FLAPS",
     type: "recharge",
@@ -1322,7 +1322,7 @@ export const PRODUCTS: Product[] = [
     promoEligible: false,
   },
   {
-    ref: "102254102",
+    ref: "102254101",
     nameFr: "INFINITY TR 30 IW HEAD FLAPS",
     nameDe: "INFINITY TR 30 IW HEAD FLAPS",
     type: "recharge",
