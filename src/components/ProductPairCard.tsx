@@ -26,7 +26,8 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
 
   const nameFr = products[0].nameFr;
   const nameDe = products[0].nameDe;
-  const info = productInfo[nameFr];
+  const infoKey = products[0].infoKey ?? nameFr;
+  const info = productInfo[infoKey];
 
   const hasRevente = Boolean(revente);
   const hasCabine = Boolean(cabine || recharge);

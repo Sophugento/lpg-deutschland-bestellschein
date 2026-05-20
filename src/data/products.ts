@@ -20,6 +20,7 @@ export interface Product {
   ref: string;
   nameFr: string; // English name (same as nameDe — app is German only)
   nameDe: string;
+  infoKey?: string; // fixed key for productInfo lookup — independent of display name
   type: "revente" | "professionnel" | "recharge";
   size: string;
   price: number;

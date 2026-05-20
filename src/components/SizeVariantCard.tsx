@@ -29,7 +29,7 @@ export default function SizeVariantCard({
 }: Props) {
   const [showInfo, setShowInfo] = useState(false);
 
-  const info = productInfo[products[0].nameFr];
+  const info = productInfo[products[0].infoKey ?? products[0].nameFr];
   const isActive = products.some((p) => (quantities[p.ref] || 0) > 0);
 
   return (

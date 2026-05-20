@@ -69,12 +69,16 @@ export async function getCatalog(): Promise<Catalog> {
       fetchSheet("Descriptions & Images"),
     ]);
 
+    // Build ref → infoKey map from static data so sheet name changes never break the "i" button
+    const staticInfoKey = new Map(PRODUCTS.map((p) => [p.ref, p.infoKey ?? p.nameFr]));
+
     const products: Product[] = prodRows
       .filter((r) => str(r["Réf."]) && !str(r["Réf."]).startsWith("📌"))
       .map((r) => ({
         ref: str(r["Réf."]),
         nameFr: str(r["Nom"]),
         nameDe: str(r["Nom"]),
+        infoKey: staticInfoKey.get(str(r["Réf."])) ?? str(r["Nom"]),
         type: str(r["Type"]) as Product["type"],
         size: str(r["Contenant"]),
         price: num(r["Prix EUR (HT)"]),
