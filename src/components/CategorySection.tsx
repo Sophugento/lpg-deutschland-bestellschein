@@ -27,11 +27,12 @@ function getBaseName(nameFr: string): string {
 }
 
 function groupProducts(products: Product[]): CardGroup[] {
-  // Only products whose nameFr contains " — " can be size variants (e.g. "TUNIQUE NOIRE — S/36")
+  // Use infoKey (fixed from static data) for grouping so sheet name changes don't break sizes
   const baseCount = new Map<string, number>();
   for (const p of products) {
-    if (p.nameFr.includes(" — ")) {
-      const base = getBaseName(p.nameFr);
+    const key = p.infoKey ?? p.nameFr;
+    if (key.includes(" — ")) {
+      const base = getBaseName(key);
       baseCount.set(base, (baseCount.get(base) || 0) + 1);
     }
   }
@@ -40,22 +41,22 @@ function groupProducts(products: Product[]): CardGroup[] {
   const result: CardGroup[] = [];
 
   for (const p of products) {
-    const base = getBaseName(p.nameFr);
-    const isSizeVariant = p.nameFr.includes(" — ") && (baseCount.get(base) || 0) > 1;
+    const key = p.infoKey ?? p.nameFr;
+    const base = getBaseName(key);
+    const isSizeVariant = key.includes(" — ") && (baseCount.get(base) || 0) > 1;
 
     if (isSizeVariant) {
       if (seen.has(`sizes__${base}`)) continue;
       seen.add(`sizes__${base}`);
-      const group = products.filter((x) => getBaseName(x.nameFr) === base && x.size !== "");
-      // baseName DE: take part before " — " from first product's nameDe
+      const group = products.filter((x) => getBaseName(x.infoKey ?? x.nameFr) === base && x.size !== "");
       const baseNameDe = getBaseName(group[0].nameDe);
       result.push({ kind: "sizes", baseName: base, baseNameDe, products: group });
     } else {
-      const key = `${p.subcategory}__${p.nameFr}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
+      const groupKey = `${p.subcategory}__${key}`;
+      if (seen.has(groupKey)) continue;
+      seen.add(groupKey);
       const group = products.filter(
-        (x) => x.nameFr === p.nameFr && x.subcategory === p.subcategory
+        (x) => (x.infoKey ?? x.nameFr) === key && x.subcategory === p.subcategory
       );
       result.push({ kind: "pair", products: group });
     }
