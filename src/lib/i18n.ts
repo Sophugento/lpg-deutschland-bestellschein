@@ -17,6 +17,7 @@ export const T = {
   "Material-Bedarf": "Material-Bedarf",
   Textilien: "Textilien",
   Mobilier: "Möbel",
+  Technik: "Technik",
 
   offresSpeciales: "Sonderangebote",
 
@@ -40,6 +41,7 @@ export const T = {
     "Bekleidung": "Bekleidung",
     "Accessoires": "Zubehör",
     "Mobilier": "Möbel",
+    "Technik": "Technik",
   } as Record<string, string>,
 
   htNote: "Alle Preise sind Nettopreise (exkl. MwSt.)",
