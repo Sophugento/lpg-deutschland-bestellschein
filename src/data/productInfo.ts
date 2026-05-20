@@ -416,6 +416,13 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
   },
 
   // ── TEXTILES ───────────────────────────────────────────────────────────
+  "POLO": {
+    description: "Polo LPG noir.",
+    descriptionDe: "Schwarzes LPG-Polo-Shirt.",
+    benefits: ["Farbe: Schwarz", "LPG-Logo aufgestickt"],
+    benefitsDe: ["Farbe: Schwarz", "LPG-Logo aufgestickt"],
+    imageUrl: "/images/products/polo.jpeg",
+  },
   "TUNIQUE NOIRE — S/36": {
     description: "Tunique professionnelle LPG noire.",
     descriptionDe: "Professionelle schwarze LPG-Tunika.",

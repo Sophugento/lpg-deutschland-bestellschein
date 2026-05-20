@@ -29,7 +29,9 @@ export default function SizeVariantCard({
 }: Props) {
   const [showInfo, setShowInfo] = useState(false);
 
-  const info = productInfo[products[0].infoKey ?? products[0].nameFr];
+  const rawKey = products[0].infoKey ?? products[0].nameFr;
+  const baseKey = rawKey.includes(" — ") ? rawKey.slice(0, rawKey.indexOf(" — ")) : rawKey;
+  const info = productInfo[baseKey] ?? productInfo[rawKey];
   const isActive = products.some((p) => (quantities[p.ref] || 0) > 0);
 
   return (
