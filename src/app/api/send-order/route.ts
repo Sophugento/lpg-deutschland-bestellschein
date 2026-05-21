@@ -160,6 +160,96 @@ function buildHtml(payload: OrderPayload): string {
 </html>`;
 }
 
+function buildConfirmHtml(payload: OrderPayload): string {
+  const { contact, orderLines, subtotal, shipping, total } = payload;
+  const date = new Date().toLocaleDateString("de-DE", {
+    day: "2-digit", month: "2-digit", year: "numeric",
+  });
+
+  const rows = orderLines.map((l) => `
+    <tr>
+      <td style="padding:8px;font-size:13px;color:#2d2020;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.name}${l.size ? ` <span style="color:#bba8a1;font-size:11px">(${l.size})</span>` : ""}${l.type === "offre" && l.gift ? `<br><span style="font-size:11px;color:#d598aa">🎁 ${l.gift}</span>` : ""}</td>
+      <td style="padding:8px;font-size:12px;text-align:center;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty}</span>` : ""}</td>
+      <td style="padding:8px;font-size:12px;text-align:right;border-bottom:1px solid #f0ebe9;white-space:nowrap;font-family:Arial,sans-serif">${eur(l.unitPrice)}</td>
+      <td style="padding:8px;font-size:13px;font-weight:700;text-align:right;border-bottom:1px solid #f0ebe9;white-space:nowrap;font-family:Arial,sans-serif">${eur(l.lineTotal)}</td>
+    </tr>`).join("");
+
+  return `<!DOCTYPE html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background-color:#f7f4f3;font-family:Arial,Helvetica,sans-serif">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f7f4f3">
+<tr><td align="center" style="padding:24px 16px">
+  <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;border:1px solid #ded5d1">
+
+    <tr>
+      <td bgcolor="#d598aa" style="padding:28px 32px;background-color:#d598aa">
+        <p style="margin:0;color:#ffffff;font-size:22px;font-weight:700;font-family:Arial,sans-serif">LPG Deutschland</p>
+        <p style="margin:6px 0 0;color:#f9e8ef;font-size:13px;font-family:Arial,sans-serif">Bestellbestätigung — ${date}</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="padding:28px 32px">
+        <p style="margin:0 0 8px;font-size:15px;font-weight:700;color:#2d2020;font-family:Arial,sans-serif">Guten Tag ${contact.firstName},</p>
+        <p style="margin:0 0 24px;font-size:13px;color:#555555;line-height:1.6;font-family:Arial,sans-serif">Wir haben Ihre Bestellung erhalten und bearbeiten sie so schnell wie möglich. Nachfolgend finden Sie die Zusammenfassung Ihrer Bestellung.</p>
+
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px">
+          <tr>
+            <td bgcolor="#fff8f0" style="padding:14px 16px;background-color:#fff8f0;border:1px solid #f5c542;border-left:4px solid #f5c542">
+              <p style="margin:0;font-size:13px;color:#7a5c00;line-height:1.6;font-family:Arial,sans-serif">⚠️ Diese Bestellung erfolgt vorbehaltlich der Verfügbarkeit der Produkte auf Lager. Unser Team meldet sich bei Ihnen, falls ein Artikel nicht verfügbar sein sollte.</p>
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:0 0 10px;font-size:11px;color:#bba8a1;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif">Ihre Bestellung</p>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;border:1px solid #ded5d1">
+          <tr bgcolor="#f7f4f3">
+            <th style="padding:8px;font-size:10px;color:#bba8a1;text-align:left;font-weight:700;font-family:Arial,sans-serif">Produkt</th>
+            <th style="padding:8px;font-size:10px;color:#bba8a1;text-align:center;font-weight:700;font-family:Arial,sans-serif">Anz.</th>
+            <th style="padding:8px;font-size:10px;color:#bba8a1;text-align:right;font-weight:700;font-family:Arial,sans-serif">E.P.</th>
+            <th style="padding:8px;font-size:10px;color:#bba8a1;text-align:right;font-weight:700;font-family:Arial,sans-serif">Total</th>
+          </tr>
+          ${rows}
+        </table>
+
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:16px">
+          <tr>
+            <td style="padding:5px 0;font-size:13px;color:#666666;font-family:Arial,sans-serif">Zwischensumme</td>
+            <td style="padding:5px 0;font-size:13px;text-align:right;font-family:Arial,sans-serif">${eur(subtotal)}</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 0;font-size:13px;color:#666666;font-family:Arial,sans-serif">Porto</td>
+            <td style="padding:5px 0;font-size:13px;text-align:right;font-family:Arial,sans-serif">${shipping === 0 ? "Gratis" : eur(shipping)}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 0 4px;font-size:16px;font-weight:700;color:#2d2020;border-top:2px solid #ded5d1;font-family:Arial,sans-serif">Total netto</td>
+            <td style="padding:12px 0 4px;font-size:16px;font-weight:700;text-align:right;color:#d598aa;border-top:2px solid #ded5d1;font-family:Arial,sans-serif;white-space:nowrap">${eur(total)}</td>
+          </tr>
+          <tr>
+            <td style="padding:3px 0;font-size:11px;color:#bba8a1;font-family:Arial,sans-serif">Total inkl. MwSt. (19%)</td>
+            <td style="padding:3px 0;font-size:11px;text-align:right;color:#bba8a1;font-family:Arial,sans-serif;white-space:nowrap">${eur(total * 1.19)}</td>
+          </tr>
+        </table>
+
+        <p style="margin:28px 0 4px;font-size:13px;color:#555555;font-family:Arial,sans-serif">Vielen Dank für Ihr Vertrauen.</p>
+        <p style="margin:0;font-size:13px;font-weight:700;color:#2d2020;font-family:Arial,sans-serif">Das LPG Deutschland Team</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td bgcolor="#f7f4f3" style="padding:16px 32px;text-align:center;border-top:1px solid #ded5d1;background-color:#f7f4f3">
+        <p style="margin:0;font-size:11px;color:#bba8a1;font-family:Arial,sans-serif">LPG Deutschland — Bestellbestätigung 2026</p>
+      </td>
+    </tr>
+
+  </table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
 export async function POST(req: NextRequest) {
   const payload: OrderPayload = await req.json();
   const { contact, orderLines } = payload;
@@ -181,9 +271,8 @@ export async function POST(req: NextRequest) {
   const html = buildHtml(payload);
   const subject = `Bestellung — ${contact.firstName} ${contact.lastName}${contact.company ? " — " + contact.company : ""}`;
 
-  let resendRes: Response;
-  try {
-    resendRes = await fetch("https://api.resend.com/emails", {
+  const sendEmail = async (to: string[], emailSubject: string, emailHtml: string) => {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -191,23 +280,27 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         from: `LPG Deutschland <${orderEmail}>`,
-        to: [orderEmail],
-        cc: [contact.email],
-        subject,
-        html,
+        to,
+        subject: emailSubject,
+        html: emailHtml,
       }),
     });
+    return res;
+  };
+
+  try {
+    const orderRes = await sendEmail([orderEmail], subject, html);
+    if (!orderRes.ok) {
+      const body = await orderRes.json().catch(() => ({}));
+      const msg = (body as { message?: string }).message ?? orderRes.statusText;
+      return NextResponse.json({ error: `Resend (${orderRes.status}): ${msg}` }, { status: 500 });
+    }
+
+    const confirmHtml = buildConfirmHtml(payload);
+    const confirmSubject = `Ihre Bestellbestätigung — LPG Deutschland`;
+    await sendEmail([contact.email], confirmSubject, confirmHtml);
   } catch (e) {
     return NextResponse.json({ error: `Netzwerkfehler: ${e}` }, { status: 502 });
-  }
-
-  if (!resendRes.ok) {
-    const body = await resendRes.json().catch(() => ({}));
-    const msg = (body as { message?: string }).message ?? resendRes.statusText;
-    return NextResponse.json(
-      { error: `Resend (${resendRes.status}): ${msg}` },
-      { status: 500 }
-    );
   }
 
   return NextResponse.json({ ok: true });
