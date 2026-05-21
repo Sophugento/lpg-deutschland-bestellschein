@@ -98,7 +98,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
               className="flex-1 px-3 py-3"
               style={isPair ? { borderRight: "1px solid #f0ebe9" } : {}}
             >
-              <div className="flex items-center gap-1.5 mb-2">
+              <div className="flex flex-col items-start gap-1 mb-2">
                 {(isPair || !hasCabine) && (
                   <span
                     className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
@@ -146,7 +146,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
             const bgColor = recharge ? "#e8c0cc" : "#bba8a1";
             return (
               <div className="flex-1 px-3 py-3" style={{ backgroundColor: "#faf9f8" }}>
-                <div className="flex items-center gap-1.5 mb-2">
+                <div className="flex flex-col items-start gap-1 mb-2">
                   {(isPair || !hasRevente) && (
                     <span
                       className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
