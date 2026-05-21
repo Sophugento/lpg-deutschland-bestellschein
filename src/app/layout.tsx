@@ -9,8 +9,8 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Bon de commande — LPG Switzerland",
-  description: "Commandez vos produits cosmétiques LPG en ligne",
+  title: "Bestellschein — LPG Deutschland",
+  description: "Bestellen Sie Ihre LPG Kosmetikprodukte online",
 };
 
 export default function RootLayout({
