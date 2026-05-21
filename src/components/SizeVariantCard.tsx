@@ -57,7 +57,6 @@ export default function SizeVariantCard({
   const baseKey = rawKey.includes(" — ") ? rawKey.slice(0, rawKey.indexOf(" — ")) : rawKey;
   const info = productInfo[baseKey] ?? productInfo[rawKey];
   const isActive = products.some((p) => (quantities[p.ref] || 0) > 0);
-  const groupStatus = products.find((p) => p.status)?.status;
 
   return (
     <>
@@ -73,7 +72,6 @@ export default function SizeVariantCard({
           <p className="text-sm font-bold uppercase tracking-wide flex-1 mr-2" style={{ color: "#2d2020" }}>
             {baseNameDe}
           </p>
-          {groupStatus && <StatusBadge status={groupStatus} t={t} />}
           {info && (
             <button
               onClick={() => setShowInfo(true)}
@@ -96,6 +94,11 @@ export default function SizeVariantCard({
                 className="px-4 py-2.5"
                 style={idx < products.length - 1 ? { borderBottom: "1px solid #f0ebe9" } : {}}
               >
+                {p.status && (
+                  <div className="mb-1">
+                    <StatusBadge status={p.status} t={t} />
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-semibold w-14 shrink-0" style={{ color: "#bba8a1" }}>
                     {p.size}

@@ -78,7 +78,6 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
           <p className="text-sm font-bold uppercase tracking-wide flex-1 mr-2" style={{ color: "#2d2020" }}>
             {nameDe}
           </p>
-          {products[0].status && <StatusBadge status={products[0].status} t={t} />}
           {info && (
             <button
               onClick={() => setShowInfo(true)}
@@ -99,14 +98,17 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
               className="flex-1 px-3 py-3"
               style={isPair ? { borderRight: "1px solid #f0ebe9" } : {}}
             >
-              {(isPair || !hasCabine) && (
-                <span
-                  className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white inline-block mb-2"
-                  style={{ backgroundColor: "#d598aa" }}
-                >
-                  {t.revente}
-                </span>
-              )}
+              <div className="flex items-center gap-1.5 mb-2">
+                {(isPair || !hasCabine) && (
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                    style={{ backgroundColor: "#d598aa" }}
+                  >
+                    {t.revente}
+                  </span>
+                )}
+                {revente.status && <StatusBadge status={revente.status} t={t} />}
+              </div>
               <p className="text-xs" style={{ color: "#bba8a1" }}>
                 {translateSize(revente.size)}
               </p>
@@ -144,14 +146,17 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
             const bgColor = recharge ? "#e8c0cc" : "#bba8a1";
             return (
               <div className="flex-1 px-3 py-3" style={{ backgroundColor: "#faf9f8" }}>
-                {(isPair || !hasRevente) && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white inline-block mb-2"
-                    style={{ backgroundColor: bgColor }}
-                  >
-                    {typeLabel}
-                  </span>
-                )}
+                <div className="flex items-center gap-1.5 mb-2">
+                  {(isPair || !hasRevente) && (
+                    <span
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                      style={{ backgroundColor: bgColor }}
+                    >
+                      {typeLabel}
+                    </span>
+                  )}
+                  {prod.status && <StatusBadge status={prod.status} t={t} />}
+                </div>
                 <p className="text-xs" style={{ color: "#bba8a1" }}>
                   {translateSize(prod.size)}
                 </p>
