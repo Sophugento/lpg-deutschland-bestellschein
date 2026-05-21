@@ -20,7 +20,8 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
   let labels = table.cols.map((c) => {
     const label = c.label.trim();
     const markerIdx = label.indexOf(" 📌");
-    return markerIdx >= 0 ? label.slice(0, markerIdx) : label;
+    const cleaned = markerIdx >= 0 ? label.slice(0, markerIdx) : label;
+    return cleanLabel(cleaned);
   });
 
   const dataRows = table.rows.filter((row) => row !== null && row.c !== null);
@@ -38,6 +39,23 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
     });
     return obj;
   });
+}
+
+// Known headers sorted longest-first so multi-word names match before single words.
+// gviz sometimes embeds all column values into the label (e.g. "Réf. 102435100 102435200…").
+// This helper extracts just the column name so lookups like r["Réf."] still work.
+const KNOWN_HEADERS = [
+  "Prix vente EUR", "Sous-catégorie", "Promo éligible", "Prix EUR (HT)",
+  "Nom (clé)", "Description DE", "Cadeau inclus", "URL Image",
+  "Contenant", "Catégorie", "Bénéfice 1", "Bénéfice 2", "Bénéfice 3",
+  "Description", "Statut", "Type", "Nom", "Réf.", "ID",
+];
+function cleanLabel(label: string): string {
+  for (const h of KNOWN_HEADERS) {
+    if (label === h || label.startsWith(h + " ")) return h;
+  }
+  const di = label.search(/\d/);
+  return di > 0 ? label.slice(0, di).trim() : label;
 }
 
 function str(v: unknown): string {
@@ -69,25 +87,26 @@ export async function getCatalog(): Promise<Catalog> {
       fetchSheet("Descriptions & Images"),
     ]);
 
-    // Build ref → infoKey map from static data so sheet name changes never break the "i" button
-    const staticInfoKey = new Map(PRODUCTS.map((p) => [p.ref, p.infoKey ?? p.nameFr]));
-
-    const products: Product[] = prodRows
+    // Build override map from sheet rows (ref → updatable fields only).
+    // PRODUCTS static list is always the base — the sheet only patches what changed.
+    const overrides = new Map<string, Partial<Product>>();
+    prodRows
       .filter((r) => str(r["Réf."]) && !str(r["Réf."]).startsWith("📌"))
-      .map((r) => ({
-        ref: str(r["Réf."]),
-        nameFr: str(r["Nom"]),
-        nameDe: str(r["Nom"]),
-        infoKey: staticInfoKey.get(str(r["Réf."])) ?? str(r["Nom"]),
-        type: str(r["Type"]) as Product["type"],
-        size: str(r["Contenant"]),
-        price: num(r["Prix EUR (HT)"]),
-        retailPrice: num(r["Prix vente EUR"]) || undefined,
-        category: str(r["Catégorie"]),
-        subcategory: str(r["Sous-catégorie"]),
-        promoEligible: bool(r["Promo éligible"]),
-        status: (str(r["Statut"]).toLowerCase() || undefined) as Product["status"],
-      }));
+      .forEach((r) => {
+        const ref = str(r["Réf."]);
+        const patch: Partial<Product> = {};
+        if (str(r["Nom"])) { patch.nameFr = str(r["Nom"]); patch.nameDe = str(r["Nom"]); }
+        if (num(r["Prix EUR (HT)"])) patch.price = num(r["Prix EUR (HT)"]);
+        if (num(r["Prix vente EUR"])) patch.retailPrice = num(r["Prix vente EUR"]);
+        const status = str(r["Statut"]).toLowerCase();
+        if (status) patch.status = status as Product["status"];
+        overrides.set(ref, patch);
+      });
+
+    const products: Product[] = PRODUCTS.map((p) => {
+      const patch = overrides.get(p.ref);
+      return patch ? { ...p, ...patch } : p;
+    });
 
     const offers: Offer[] = offerRows
       .filter((r) => str(r["ID"]) && !str(r["ID"]).startsWith("📌"))
@@ -116,7 +135,7 @@ export async function getCatalog(): Promise<Catalog> {
       });
 
     return {
-      products: products.length > 0 ? products : PRODUCTS,
+      products,
       offers,
       productInfo,
     };
