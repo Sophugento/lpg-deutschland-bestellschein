@@ -23,13 +23,13 @@ function StatusBadge({ status, t }: { status: string; t: T }) {
       {t.statusNew}
     </span>
   );
-  if (status === "indisponible") return (
+  if (status === "nicht verfügbar") return (
     <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#e0dbd8", color: "#7a6e6a" }}>
       {t.statusIndispo}
     </span>
   );
-  if (status === "rupture de stock") return (
-    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#f5e4c0", color: "#8a6000" }}>
+  if (status === "nicht vorrätig") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#e0dbd8", color: "#7a6e6a" }}>
       {t.statusRupture}
     </span>
   );
@@ -37,7 +37,7 @@ function StatusBadge({ status, t }: { status: string; t: T }) {
 }
 
 function isBlocked(status?: string) {
-  return status === "indisponible" || status === "rupture de stock";
+  return status === "nicht verfügbar" || status === "nicht vorrätig";
 }
 
 export default function ProductPairCard({ products, quantities, onChange, t, productInfo }: Props) {
