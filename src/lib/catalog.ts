@@ -65,10 +65,6 @@ function num(v: unknown): number {
   const n = parseFloat(String(v));
   return isNaN(n) ? 0 : n;
 }
-function bool(v: unknown): boolean {
-  if (typeof v === "boolean") return v;
-  return String(v).toLowerCase() === "true";
-}
 
 export interface Catalog {
   products: Product[];
