@@ -10,28 +10,20 @@ interface GvizTable {
 
 async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]> {
   if (!SHEET_ID) return [];
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  // headers=1 forces gviz to use row 1 as header — avoids contaminated label bug
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(sheetName)}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Sheet fetch failed: ${sheetName}`);
   const text = await res.text();
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}") + 1;
   const table: GvizTable = JSON.parse(text.slice(start, end)).table;
-  let labels = table.cols.map((c) => {
+  const labels = table.cols.map((c) => {
     const label = c.label.trim();
     const markerIdx = label.indexOf(" 📌");
-    const cleaned = markerIdx >= 0 ? label.slice(0, markerIdx) : label;
-    return cleanLabel(cleaned);
+    return markerIdx >= 0 ? label.slice(0, markerIdx) : label;
   });
-
   const dataRows = table.rows.filter((row) => row !== null && row.c !== null);
-
-  // Excel imports leave col labels empty — use first data row as header instead
-  if (labels.every((l) => l === "") && dataRows.length > 0) {
-    labels = dataRows[0]!.c.map((cell) => String(cell?.v ?? "").trim());
-    dataRows.shift();
-  }
-
   return dataRows.map((row) => {
     const obj: Record<string, unknown> = {};
     row!.c.forEach((cell, i) => {
@@ -39,23 +31,6 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
     });
     return obj;
   });
-}
-
-// Known headers sorted longest-first so multi-word names match before single words.
-// gviz sometimes embeds all column values into the label (e.g. "Réf. 102435100 102435200…").
-// This helper extracts just the column name so lookups like r["Réf."] still work.
-const KNOWN_HEADERS = [
-  "Prix vente EUR", "Sous-catégorie", "Promo éligible", "Prix EUR (HT)",
-  "Nom (clé)", "Description DE", "Cadeau inclus", "URL Image",
-  "Contenant", "Catégorie", "Bénéfice 1", "Bénéfice 2", "Bénéfice 3",
-  "Description", "Statut", "Type", "Nom", "Réf.", "ID",
-];
-function cleanLabel(label: string): string {
-  for (const h of KNOWN_HEADERS) {
-    if (label === h || label.startsWith(h + " ")) return h;
-  }
-  const di = label.search(/\d/);
-  return di > 0 ? label.slice(0, di).trim() : label;
 }
 
 function str(v: unknown): string {
@@ -130,11 +105,7 @@ export async function getCatalog(): Promise<Catalog> {
         };
       });
 
-    return {
-      products,
-      offers,
-      productInfo,
-    };
+    return { products, offers, productInfo };
   } catch (err) {
     console.error("Google Sheets unavailable, using static data:", err);
     return { products: PRODUCTS, offers: OFFERS, productInfo: PRODUCT_INFO };

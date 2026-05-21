@@ -163,7 +163,13 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
                 <p className="text-base font-bold mt-1" style={{ color: "#2d2020" }}>
                   {formatEUR(prod.price)}
                 </p>
-                <div className="mb-2 h-4" />
+                {prod.retailPrice ? (
+                  <p className="text-[10px] mb-2" style={{ color: "#bba8a1" }}>
+                    {t.prixVente} {formatEUR(prod.retailPrice)}
+                  </p>
+                ) : (
+                  <div className="mb-2 h-4" />
+                )}
                 <QuantitySelector value={qty} onChange={(v) => onChange(prod.ref, v)} disabled={isBlocked(prod.status)} />
                 {qty > 0 && (
                   <div className="mt-1.5 space-y-0.5">
