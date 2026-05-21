@@ -232,6 +232,15 @@ function buildConfirmHtml(payload: OrderPayload): string {
           </tr>
         </table>
 
+        ${contact.notes ? `
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:24px">
+          <tr>
+            <td style="padding:14px 16px;background-color:#f7f4f3;border-radius:8px;font-size:12px;color:#666666;font-family:Arial,sans-serif;line-height:1.6">
+              <strong style="color:#2d2020">Bemerkungen :</strong> ${contact.notes}
+            </td>
+          </tr>
+        </table>` : ""}
+
         <p style="margin:28px 0 4px;font-size:13px;color:#555555;font-family:Arial,sans-serif">Vielen Dank für Ihr Vertrauen.</p>
         <p style="margin:0;font-size:13px;font-weight:700;color:#2d2020;font-family:Arial,sans-serif">Das LPG Deutschland Team</p>
       </td>
