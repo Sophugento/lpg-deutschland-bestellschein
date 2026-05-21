@@ -20,8 +20,7 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
   let labels = table.cols.map((c) => {
     const label = c.label.trim();
     const markerIdx = label.indexOf(" 📌");
-    const cleaned = markerIdx >= 0 ? label.slice(0, markerIdx) : label;
-    return cleanLabel(cleaned);
+    return markerIdx >= 0 ? label.slice(0, markerIdx) : label;
   });
 
   const dataRows = table.rows.filter((row) => row !== null && row.c !== null);
@@ -39,25 +38,6 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
     });
     return obj;
   });
-}
-
-// Known column headers sorted longest-first so multi-word names match before single words
-const KNOWN_HEADERS = [
-  "Prix vente EUR", "Sous-catégorie", "Promo éligible", "Prix EUR (HT)",
-  "Nom (clé)", "Description DE", "Cadeau inclus", "URL Image",
-  "Contenant", "Catégorie", "Bénéfice 1", "Bénéfice 2", "Bénéfice 3",
-  "Description", "Statut", "Type", "Nom", "Réf.", "ID",
-];
-
-// gviz sometimes embeds all column values in the label (e.g. "Réf. 102435100 102435200…").
-// Strip everything after the known header prefix so lookups like r["Réf."] still work.
-function cleanLabel(label: string): string {
-  for (const h of KNOWN_HEADERS) {
-    if (label === h || label.startsWith(h + " ")) return h;
-  }
-  // Fallback: cut at first digit (handles unknown numeric columns)
-  const di = label.search(/\d/);
-  return di > 0 ? label.slice(0, di).trim() : label;
 }
 
 function str(v: unknown): string {
