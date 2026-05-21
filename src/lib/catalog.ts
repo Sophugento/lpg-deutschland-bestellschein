@@ -86,6 +86,7 @@ export async function getCatalog(): Promise<Catalog> {
         category: str(r["Catégorie"]),
         subcategory: str(r["Sous-catégorie"]),
         promoEligible: bool(r["Promo éligible"]),
+        status: (str(r["Statut"]).toLowerCase() || undefined) as Product["status"],
       }));
 
     const offers: Offer[] = offerRows

@@ -17,6 +17,29 @@ interface Props {
   productInfo: Record<string, ProductInfo>;
 }
 
+function StatusBadge({ status, t }: { status: string; t: T }) {
+  if (status === "new") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white shrink-0" style={{ backgroundColor: "#2d2020" }}>
+      {t.statusNew}
+    </span>
+  );
+  if (status === "indisponible") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#e0dbd8", color: "#7a6e6a" }}>
+      {t.statusIndispo}
+    </span>
+  );
+  if (status === "rupture de stock") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#f5e4c0", color: "#8a6000" }}>
+      {t.statusRupture}
+    </span>
+  );
+  return null;
+}
+
+function isBlocked(status?: string) {
+  return status === "indisponible" || status === "rupture de stock";
+}
+
 export default function ProductPairCard({ products, quantities, onChange, t, productInfo }: Props) {
   const [showInfo, setShowInfo] = useState(false);
 
@@ -55,6 +78,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
           <p className="text-sm font-bold uppercase tracking-wide flex-1 mr-2" style={{ color: "#2d2020" }}>
             {nameDe}
           </p>
+          {products[0].status && <StatusBadge status={products[0].status} t={t} />}
           {info && (
             <button
               onClick={() => setShowInfo(true)}
@@ -96,7 +120,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
               ) : (
                 <div className="mb-2 h-4" />
               )}
-              <QuantitySelector value={reventeQty} onChange={(v) => onChange(revente.ref, v)} />
+              <QuantitySelector value={reventeQty} onChange={(v) => onChange(revente.ref, v)} disabled={isBlocked(revente.status)} />
               {reventeQty > 0 && (
                 <div className="mt-1.5 space-y-0.5">
                   <p className="text-xs font-semibold" style={{ color: "#d598aa" }}>
@@ -135,7 +159,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
                   {formatEUR(prod.price)}
                 </p>
                 <div className="mb-2 h-4" />
-                <QuantitySelector value={qty} onChange={(v) => onChange(prod.ref, v)} />
+                <QuantitySelector value={qty} onChange={(v) => onChange(prod.ref, v)} disabled={isBlocked(prod.status)} />
                 {qty > 0 && (
                   <div className="mt-1.5 space-y-0.5">
                     <p className="text-xs font-semibold" style={{ color: "#bba8a1" }}>
@@ -163,6 +187,7 @@ export default function ProductPairCard({ products, quantities, onChange, t, pro
               <QuantitySelector
                 value={quantities[products[0].ref] || 0}
                 onChange={(v) => onChange(products[0].ref, v)}
+                disabled={isBlocked(products[0].status)}
               />
             </div>
           )}

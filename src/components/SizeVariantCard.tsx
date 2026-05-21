@@ -8,6 +8,29 @@ import { T } from "@/lib/i18n";
 import QuantitySelector from "./QuantitySelector";
 import ProductInfoModal from "./ProductInfoModal";
 
+function StatusBadge({ status, t }: { status: string; t: T }) {
+  if (status === "new") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white shrink-0" style={{ backgroundColor: "#2d2020" }}>
+      {t.statusNew}
+    </span>
+  );
+  if (status === "indisponible") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#e0dbd8", color: "#7a6e6a" }}>
+      {t.statusIndispo}
+    </span>
+  );
+  if (status === "rupture de stock") return (
+    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shrink-0" style={{ backgroundColor: "#f5e4c0", color: "#8a6000" }}>
+      {t.statusRupture}
+    </span>
+  );
+  return null;
+}
+
+function isBlocked(status?: string) {
+  return status === "indisponible" || status === "rupture de stock";
+}
+
 interface Props {
   baseName: string;
   baseNameDe: string;
@@ -25,6 +48,7 @@ export default function SizeVariantCard({
   products,
   quantities,
   onChange,
+  t,
   productInfo,
 }: Props) {
   const [showInfo, setShowInfo] = useState(false);
@@ -33,6 +57,7 @@ export default function SizeVariantCard({
   const baseKey = rawKey.includes(" — ") ? rawKey.slice(0, rawKey.indexOf(" — ")) : rawKey;
   const info = productInfo[baseKey] ?? productInfo[rawKey];
   const isActive = products.some((p) => (quantities[p.ref] || 0) > 0);
+  const groupStatus = products.find((p) => p.status)?.status;
 
   return (
     <>
@@ -48,6 +73,7 @@ export default function SizeVariantCard({
           <p className="text-sm font-bold uppercase tracking-wide flex-1 mr-2" style={{ color: "#2d2020" }}>
             {baseNameDe}
           </p>
+          {groupStatus && <StatusBadge status={groupStatus} t={t} />}
           {info && (
             <button
               onClick={() => setShowInfo(true)}
@@ -77,7 +103,7 @@ export default function SizeVariantCard({
                   <span className="text-sm font-bold shrink-0 w-20 whitespace-nowrap" style={{ color: "#2d2020" }}>
                     {formatEUR(p.price)}
                   </span>
-                  <QuantitySelector value={qty} onChange={(v) => onChange(p.ref, v)} />
+                  <QuantitySelector value={qty} onChange={(v) => onChange(p.ref, v)} disabled={isBlocked(p.status)} />
                 </div>
                 {qty > 0 && (
                   <p className="text-xs font-semibold mt-1 pl-16" style={{ color: "#d598aa" }}>

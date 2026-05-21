@@ -44,6 +44,10 @@ export const T = {
     "Technik": "Technik",
   } as Record<string, string>,
 
+  statusNew: "New",
+  statusIndispo: "Nicht verfügbar",
+  statusRupture: "Nicht vorrätig",
+
   htNote: "Alle Preise sind Nettopreise (exkl. MwSt.)",
   priceNote: "netto",
   prixVente: "Verkaufspreis:",

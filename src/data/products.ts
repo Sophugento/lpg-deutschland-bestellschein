@@ -28,6 +28,7 @@ export interface Product {
   category: string;
   subcategory: string;
   promoEligible: boolean;
+  status?: "new" | "indisponible" | "rupture de stock" | "";
 }
 
 export const MIN_ORDER = 200;
