@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.ORDER_EMAIL || "customer.de@lpgdeutschland.com";
+  const orderEmail = process.env.ORDER_EMAIL || "customer.de@lpgdeutschland.com";
 
   if (!apiKey) {
     return NextResponse.json(
@@ -190,9 +190,9 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "LPG Deutschland <onboarding@resend.dev>",
-        to: [toEmail],
-        reply_to: contact.email,
+        from: `LPG Deutschland <${orderEmail}>`,
+        to: [orderEmail],
+        cc: [contact.email],
         subject,
         html,
       }),
