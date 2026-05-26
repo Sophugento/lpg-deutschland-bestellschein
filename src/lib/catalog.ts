@@ -78,10 +78,34 @@ export async function getCatalog(): Promise<Catalog> {
         overrides.set(ref, patch);
       });
 
+    // 1. Apply sheet overrides to all static products
+    const staticRefs = new Set(PRODUCTS.map((p) => p.ref));
     const products: Product[] = PRODUCTS.map((p) => {
       const patch = overrides.get(p.ref);
       return patch ? { ...p, ...patch } : p;
     });
+
+    // 2. Append new products from the sheet that don't exist in static data
+    prodRows
+      .filter((r) => str(r["Réf."]) && !str(r["Réf."]).startsWith("📌") && !staticRefs.has(str(r["Réf."])))
+      .forEach((r) => {
+        const ref = str(r["Réf."]);
+        // Skip if we'd create a duplicate (same ref already added)
+        if (products.some((p) => p.ref === ref)) return;
+        products.push({
+          ref,
+          nameFr: str(r["Nom"]),
+          nameDe: str(r["Nom"]),
+          type: str(r["Type"]) as Product["type"] || "professionnel",
+          size: str(r["Contenant"]),
+          price: num(r["Prix EUR (HT)"]),
+          retailPrice: num(r["Prix vente EUR"]) || undefined,
+          category: str(r["Catégorie"]),
+          subcategory: str(r["Sous-catégorie"]),
+          promoEligible: false,
+          status: (str(r["Statut"]).toLowerCase() || undefined) as Product["status"],
+        });
+      });
 
     const offers: Offer[] = offerRows
       .filter((r) => str(r["ID"]) && !str(r["ID"]).startsWith("📌"))
