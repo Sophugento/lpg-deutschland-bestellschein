@@ -493,28 +493,28 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     descriptionDe: "Premium motorisierte LPG-Massageliege — höhenverstellbar.",
     benefits: ["Motorisée électriquement", "H: 68–96 cm", "Finition premium"],
     benefitsDe: ["Elektromotorisch verstellbar", "H: 68–96 cm", "Premium-Ausführung"],
-    imageUrl: "/images/products/marketing_Conso_CABINE_KABINE_left_01.png",
+    imageUrl: BASE + "ENDERMOTABLE_PREMIUM.jpg",
   },
   "TABLE STANDARD": {
     description: "Table de massage blanche LPG réglable en hauteur.",
     descriptionDe: "Weiße LPG-Massageliege höhenverstellbar.",
     benefits: ["Réglable 62–90 cm", "Charge max 130 kg", "Rembourrage confortable"],
     benefitsDe: ["Verstellbar 62–90 cm", "Max. Belastung 130 kg", "Komfortable Polsterung"],
-    imageUrl: "/images/products/table_standard.png",
+    imageUrl: BASE + "TABLE_STANDARD.jpg",
   },
   "MOBICUBE": {
     description: "Meuble de rangement mobile LPG avec tiroir et roues.",
     descriptionDe: "Mobiler LPG-Unterschrank mit Schublade und Rollen.",
     benefits: ["Compact L:57 / l:54 / H:53cm", "Roues pivotantes", "Design LPG"],
     benefitsDe: ["Kompakt L:57 / B:54 / H:53cm", "Drehrollen", "LPG-Design"],
-    imageUrl: "/images/products/marketing_Conso_CABINE_KABINE_alt1_01.png",
+    imageUrl: BASE + "MOBICUBE.jpg",
   },
   "MOBICUBE XL": {
     description: "Meuble colonne mobile LPG avec rangements multiples.",
     descriptionDe: "Mobiler LPG-Hochschrank mit mehreren Ablagen.",
     benefits: ["L:49/l:43/H:105cm", "Rangements multiples", "Roues pivotantes"],
     benefitsDe: ["L:49/l:43/H:105cm", "Mehrere Ablagen", "Drehrollen"],
-    imageUrl: "/images/products/marketing_Conso_CABINE_KABINE_alt2_01.png",
+    imageUrl: BASE + "MOBICUBE_XL.jpg",
   },
 
   // ── CONSOMMABLES (nouvelles images) ────────────────────────────────────
