@@ -99,13 +99,17 @@ export async function getCatalog(): Promise<Catalog> {
       .filter((r) => str(r["Nom (clé)"]) && !str(r["Nom (clé)"]).startsWith("📌"))
       .forEach((r) => {
         const key = str(r["Nom (clé)"]);
+        const existing = PRODUCT_INFO[key];
         const benefits = [str(r["Bénéfice 1"]), str(r["Bénéfice 2"]), str(r["Bénéfice 3"])].filter(Boolean);
         productInfo[key] = {
-          description: str(r["Description"]),
-          descriptionDe: str(r["Description DE"]),
-          benefits,
-          benefitsDe: benefits,
-          imageUrl: str(r["URL Image"]) || undefined,
+          description: str(r["Description"]) || existing?.description || "",
+          // Prefer German description from sheet; fall back to static DE version
+          descriptionDe: str(r["Description DE"]) || existing?.descriptionDe || str(r["Description"]) || "",
+          benefits: benefits.length ? benefits : (existing?.benefits ?? []),
+          // Sheet has no separate DE benefits column → keep static German benefits if they exist
+          benefitsDe: existing?.benefitsDe ?? (benefits.length ? benefits : []),
+          // Keep static image if sheet URL is empty
+          imageUrl: str(r["URL Image"]) || existing?.imageUrl || undefined,
         };
       });
 
