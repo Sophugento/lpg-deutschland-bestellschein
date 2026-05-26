@@ -34,7 +34,7 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
 }
 
 function str(v: unknown): string {
-  return v == null ? "" : String(v);
+  return v == null ? "" : String(v).trim();
 }
 function num(v: unknown): number {
   const n = parseFloat(String(v));
@@ -66,7 +66,11 @@ export async function getCatalog(): Promise<Catalog> {
       .forEach((r) => {
         const ref = str(r["Réf."]);
         const patch: Partial<Product> = {};
-        if (str(r["Nom"]))             { patch.nameFr = str(r["Nom"]); patch.nameDe = str(r["Nom"]); }
+        // Support both "Nom" (single column) and separate "Nom FR"/"Nom DE" columns
+        const nomFr = str(r["Nom FR"] ?? r["Nom"]);
+        const nomDe = str(r["Nom DE"] ?? r["Nom"]);
+        if (nomDe)  patch.nameDe = nomDe;
+        if (nomFr)  patch.nameFr = nomFr;
         if (str(r["Type"]))              patch.type = str(r["Type"]) as Product["type"];
         if (str(r["Contenant"]))         patch.size = str(r["Contenant"]);
         if (num(r["Prix EUR (HT)"]))     patch.price = num(r["Prix EUR (HT)"]);
@@ -94,8 +98,8 @@ export async function getCatalog(): Promise<Catalog> {
         if (products.some((p) => p.ref === ref)) return;
         products.push({
           ref,
-          nameFr: str(r["Nom"]),
-          nameDe: str(r["Nom"]),
+          nameFr: str(r["Nom FR"] ?? r["Nom"]),
+          nameDe: str(r["Nom DE"] ?? r["Nom"]),
           type: str(r["Type"]) as Product["type"] || "professionnel",
           size: str(r["Contenant"]),
           price: num(r["Prix EUR (HT)"]),
@@ -136,6 +140,13 @@ export async function getCatalog(): Promise<Catalog> {
           imageUrl: str(r["URL Image"]) || existing?.imageUrl || undefined,
         };
       });
+
+    // Debug: log category breakdown so issues can be spotted in Vercel logs
+    const catCounts = products.reduce((acc, p) => {
+      acc[p.category] = (acc[p.category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    console.log("[catalog] categories from sheet merge:", JSON.stringify(catCounts));
 
     return { products, offers, productInfo };
   } catch (err) {
