@@ -1280,7 +1280,9 @@ export const PRODUCTS: Product[] = [
     promoEligible: false,
   },
   {
-    ref: "102253800",
+    // LPG catalog assigns ref 102253800 to both Alliance 50 and Infinity TH 50.
+    // Using suffix -A to prevent the sheet override (Infinity TH 50) from clobbering this entry.
+    ref: "102253800-A",
     nameFr: "ALLIANCE 50 TREATMENT HEAD FLAPS",
     nameDe: "ALLIANCE 50 TREATMENT HEAD FLAPS",
     type: "professionnel",
@@ -1291,7 +1293,8 @@ export const PRODUCTS: Product[] = [
     promoEligible: false,
   },
   {
-    ref: "102254101",
+    // LPG catalog assigns ref 102254101 to both Alliance 30 and Infinity TR 30.
+    ref: "102254101-A",
     nameFr: "ALLIANCE 30 TREATMENT HEAD FLAPS",
     nameDe: "ALLIANCE 30 TREATMENT HEAD FLAPS",
     type: "professionnel",

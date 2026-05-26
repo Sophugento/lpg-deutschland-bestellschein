@@ -14,7 +14,10 @@ async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]>
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(sheetName)}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Sheet fetch failed: ${sheetName}`);
-  const text = await res.text();
+  // Force UTF-8 decoding — gviz sometimes sends Content-Type: charset=ISO-8859-1
+  // even though the payload is UTF-8, which mangles German special characters.
+  const buffer = await res.arrayBuffer();
+  const text = new TextDecoder("utf-8").decode(buffer);
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}") + 1;
   const table: GvizTable = JSON.parse(text.slice(start, end)).table;
