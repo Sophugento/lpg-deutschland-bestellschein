@@ -66,9 +66,13 @@ export async function getCatalog(): Promise<Catalog> {
       .forEach((r) => {
         const ref = str(r["Réf."]);
         const patch: Partial<Product> = {};
-        if (str(r["Nom"])) { patch.nameFr = str(r["Nom"]); patch.nameDe = str(r["Nom"]); }
-        if (num(r["Prix EUR (HT)"])) patch.price = num(r["Prix EUR (HT)"]);
-        if (num(r["Prix vente EUR"])) patch.retailPrice = num(r["Prix vente EUR"]);
+        if (str(r["Nom"]))             { patch.nameFr = str(r["Nom"]); patch.nameDe = str(r["Nom"]); }
+        if (str(r["Type"]))              patch.type = str(r["Type"]) as Product["type"];
+        if (str(r["Contenant"]))         patch.size = str(r["Contenant"]);
+        if (num(r["Prix EUR (HT)"]))     patch.price = num(r["Prix EUR (HT)"]);
+        if (num(r["Prix vente EUR"]))    patch.retailPrice = num(r["Prix vente EUR"]);
+        if (str(r["Catégorie"]))         patch.category = str(r["Catégorie"]);
+        if (str(r["Sous-catégorie"]))    patch.subcategory = str(r["Sous-catégorie"]);
         const status = str(r["Statut"]).toLowerCase();
         if (status) patch.status = status as Product["status"];
         overrides.set(ref, patch);
