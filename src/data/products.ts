@@ -1224,8 +1224,9 @@ export const PRODUCTS: Product[] = [
   // ── MOBILIER ───────────────────────────────────────────────────────────
   {
     ref: "102635600",
-    nameFr: "ENDERMOTABLE PREMIUM",
-    nameDe: "ENDERMOTABLE PREMIUM",
+    nameFr: "ENDERMOTABLE PREMIUM LIEGE",
+    nameDe: "ENDERMOTABLE PREMIUM LIEGE",
+    infoKey: "ENDERMOTABLE PREMIUM",
     type: "professionnel",
     size: "L186/l72/H68–96cm",
     price: 3880.00,
