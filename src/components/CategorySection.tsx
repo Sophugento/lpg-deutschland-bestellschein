@@ -21,8 +21,16 @@ type CardGroup =
   | { kind: "pair"; products: Product[] }
   | { kind: "sizes"; baseName: string; baseNameDe: string; products: Product[] };
 
+// Accept both em-dash " — " and plain hyphen " - " as size separators
+// so sheet entries using either format still group correctly.
+function getSizeSeparatorIdx(name: string): number {
+  const emDash = name.indexOf(" — ");
+  if (emDash >= 0) return emDash;
+  return name.indexOf(" - ");
+}
+
 function getBaseName(nameFr: string): string {
-  const idx = nameFr.indexOf(" — ");
+  const idx = getSizeSeparatorIdx(nameFr);
   return idx >= 0 ? nameFr.slice(0, idx) : nameFr;
 }
 
@@ -31,7 +39,7 @@ function groupProducts(products: Product[]): CardGroup[] {
   const baseCount = new Map<string, number>();
   for (const p of products) {
     const key = p.infoKey ?? p.nameFr;
-    if (key.includes(" — ")) {
+    if (getSizeSeparatorIdx(key) >= 0) {
       const base = getBaseName(key);
       baseCount.set(base, (baseCount.get(base) || 0) + 1);
     }
@@ -43,7 +51,7 @@ function groupProducts(products: Product[]): CardGroup[] {
   for (const p of products) {
     const key = p.infoKey ?? p.nameFr;
     const base = getBaseName(key);
-    const isSizeVariant = key.includes(" — ") && (baseCount.get(base) || 0) > 1;
+    const isSizeVariant = getSizeSeparatorIdx(key) >= 0 && (baseCount.get(base) || 0) > 1;
 
     if (isSizeVariant) {
       if (seen.has(`sizes__${base}`)) continue;

@@ -1109,17 +1109,6 @@ export const PRODUCTS: Product[] = [
     promoEligible: false,
   },
   {
-    ref: "1015575",
-    nameFr: "POLO — S",
-    nameDe: "POLO — S",
-    type: "professionnel",
-    size: "S",
-    price: 32.00,
-    category: "Textilien",
-    subcategory: "Bekleidung",
-    promoEligible: false,
-  },
-  {
     ref: "1015576",
     nameFr: "POLO — M",
     nameDe: "POLO — M",
