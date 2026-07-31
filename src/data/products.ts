@@ -28,7 +28,7 @@ export interface Product {
   category: string;
   subcategory: string;
   promoEligible: boolean;
-  status?: "new" | "nicht verfügbar" | "nicht vorrätig" | "";
+  status?: "new" | "nicht verfügbar" | "nicht vorrätig" | "inactif" | "";
 }
 
 export const MIN_ORDER = 200;
