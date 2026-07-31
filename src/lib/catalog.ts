@@ -52,7 +52,7 @@ export interface Catalog {
 
 export async function getCatalog(): Promise<Catalog> {
   if (!SHEET_ID) {
-    return { products: PRODUCTS, offers: OFFERS, productInfo: PRODUCT_INFO };
+    return { products: PRODUCTS.filter((p) => p.status !== "inactif"), offers: OFFERS, productInfo: PRODUCT_INFO };
   }
   try {
     const [prodRows, offerRows, descRows] = await Promise.all([
@@ -144,14 +144,17 @@ export async function getCatalog(): Promise<Catalog> {
         };
       });
 
+    // Remove products marked inactif (deleted from sheet but still in static data)
+    const activeProducts = products.filter((p) => p.status !== "inactif");
+
     // Debug: log category breakdown so issues can be spotted in Vercel logs
-    const catCounts = products.reduce((acc, p) => {
+    const catCounts = activeProducts.reduce((acc, p) => {
       acc[p.category] = (acc[p.category] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
     console.log("[catalog] categories from sheet merge:", JSON.stringify(catCounts));
 
-    return { products, offers, productInfo };
+    return { products: activeProducts, offers, productInfo };
   } catch (err) {
     console.error("Google Sheets unavailable, using static data:", err);
     return { products: PRODUCTS, offers: OFFERS, productInfo: PRODUCT_INFO };
