@@ -9,6 +9,7 @@ export interface ProductInfo {
 
 const BASE = "https://www.lpg-group.com/media/wysiwyg/";
 const BASE_URL = "https://www.lpg-group.com/fr/expertise-esthetique/cosmetiques/";
+const GDRIVE = "https://lh3.googleusercontent.com/d/";
 
 export const PRODUCT_INFO: Record<string, ProductInfo> = {
   // ── CORPS ──────────────────────────────────────────────────────────────
@@ -428,28 +429,28 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     descriptionDe: "Professionelle schwarze LPG-Tunika.",
     benefits: ["Coupe enveloppante", "Matière fluide", "Couleur : noir"],
     benefitsDe: ["Fließendes Material", "Eingehüllter Schnitt", "Farbe: Schwarz"],
-    imageUrl: "/images/products/tunique_noire.png",
+    imageUrl: GDRIVE + "1AREO-dkgAvvlpQNESAfZRadqEw5zxImW",
   },
   "TUNIQUE NOIRE — M/38": {
     description: "Tunique professionnelle LPG noire.",
     descriptionDe: "Professionelle schwarze LPG-Tunika.",
     benefits: ["Coupe enveloppante", "Matière fluide", "Couleur : noir"],
     benefitsDe: ["Fließendes Material", "Eingehüllter Schnitt", "Farbe: Schwarz"],
-    imageUrl: "/images/products/tunique_noire.png",
+    imageUrl: GDRIVE + "1AREO-dkgAvvlpQNESAfZRadqEw5zxImW",
   },
   "TUNIQUE NOIRE — L/40": {
     description: "Tunique professionnelle LPG noire.",
     descriptionDe: "Professionelle schwarze LPG-Tunika.",
     benefits: ["Coupe enveloppante", "Matière fluide", "Couleur : noir"],
     benefitsDe: ["Fließendes Material", "Eingehüllter Schnitt", "Farbe: Schwarz"],
-    imageUrl: "/images/products/tunique_noire.png",
+    imageUrl: GDRIVE + "1AREO-dkgAvvlpQNESAfZRadqEw5zxImW",
   },
   "TUNIQUE NOIRE — XL/42": {
     description: "Tunique professionnelle LPG noire.",
     descriptionDe: "Professionelle schwarze LPG-Tunika.",
     benefits: ["Coupe enveloppante", "Matière fluide", "Couleur : noir"],
     benefitsDe: ["Fließendes Material", "Eingehüllter Schnitt", "Farbe: Schwarz"],
-    imageUrl: "/images/products/tunique_noire.png",
+    imageUrl: GDRIVE + "1AREO-dkgAvvlpQNESAfZRadqEw5zxImW",
   },
   "TUNIQUE BLANCHE — S/36": {
     description: "Tunique professionnelle LPG blanche.",
@@ -500,7 +501,7 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     descriptionDe: "Weiße LPG-Massageliege höhenverstellbar.",
     benefits: ["Réglable 62–90 cm", "Charge max 130 kg", "Rembourrage confortable"],
     benefitsDe: ["Verstellbar 62–90 cm", "Max. Belastung 130 kg", "Komfortable Polsterung"],
-    imageUrl: "/images/products/table_standard.png",
+    imageUrl: GDRIVE + "1Z1lT8Eg9pMtTkseT1g80ViNYiekUsCD1",
   },
   "MOBICUBE": {
     description: "Meuble de rangement mobile LPG avec tiroir et roues.",
@@ -565,70 +566,108 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     descriptionDe: "Graue Endermowear-Kombination für Herren für Endermologie-Behandlungen.",
     benefits: ["Tissu technique breveté", "Optimise l'efficacité du soin", "Usage cabine"],
     benefitsDe: ["Patentierter Technologiestoff", "Optimiert die Behandlungseffizienz", "Kabinengebrauch"],
-    imageUrl: "/images/products/endermowear_homme_gris.png",
+    imageUrl: GDRIVE + "1J9gYeds-INift-w6ZaeYWmGlnCiPn-qC",
   },
   "KIT ENDERMOLOGIE — LIFT 10 ET 20": {
     description: "Kit Endermologie complet pour les appareils LPG Lift 10 et Lift 20.",
     descriptionDe: "Vollständiges Endermologie-Kit für LPG Lift 10 und Lift 20 Geräte.",
     benefits: ["Compatible Lift 10 & 20", "Accessoires complets", "Usage professionnel"],
     benefitsDe: ["Kompatibel mit Lift 10 & 20", "Vollständiges Zubehör", "Professioneller Einsatz"],
-    imageUrl: "/images/products/kit_endermologie.png",
+    imageUrl: GDRIVE + "12l2gSmjQn51sq5iQnGmoWVAprUnK4Yw1",
   },
   "BOX 6x FILTRE": {
     description: "Box de 6 filtres de remplacement pour appareils LPG.",
     descriptionDe: "Box mit 6 Ersatzfiltern für LPG-Geräte.",
     benefits: ["Pack de 6 filtres", "Remplacement facile", "Compatible LPG"],
     benefitsDe: ["6er-Pack Filter", "Einfacher Austausch", "LPG-kompatibel"],
-    imageUrl: "/images/products/box_6_filtres.png",
+    imageUrl: GDRIVE + "1kTI_W2G7rfSHfbopDmmCDcvaS02cBfP7",
   },
   "SAC LPG GRAND (x10)": {
     description: "Sacs LPG grand format — lot de 10.",
     descriptionDe: "Große LPG-Tüten — 10er-Pack.",
     benefits: ["Format grand", "Lot de 10", "Marquage LPG"],
     benefitsDe: ["Großes Format", "10er-Pack", "LPG-Aufdruck"],
-    imageUrl: "/images/products/sac_lpg_grand.png",
+    imageUrl: GDRIVE + "1loEWC4FNEiZ8Ok93uTVKyDBJCVbnvRMa",
   },
   "SAC LPG PETIT (x10)": {
     description: "Sacs LPG petit format — lot de 10.",
     descriptionDe: "Kleine LPG-Tüten — 10er-Pack.",
     benefits: ["Format compact", "Lot de 10", "Marquage LPG"],
     benefitsDe: ["Kompaktes Format", "10er-Pack", "LPG-Aufdruck"],
-    imageUrl: "/images/products/sac_lpg_petit.png",
+    imageUrl: GDRIVE + "1EqQk1ED4SuQHSkTybeTibD1YygSDL2ZJ",
   },
   "PEIGNOIR 100% COTON — M": {
     description: "Peignoir 100% coton LPG.",
     descriptionDe: "Bademantel 100% Baumwolle LPG.",
     benefits: ["100% coton doux", "Marquage LPG brodé", "Confort optimal"],
     benefitsDe: ["100% weiche Baumwolle", "Eingesticktes LPG-Logo", "Optimaler Komfort"],
-    imageUrl: "/images/products/peignoir.jpg",
+    imageUrl: GDRIVE + "1JLYVjq0SmD-u4xxJYvxlHR8AqDHYbM5P",
   },
   "PEIGNOIR 100% COTON — L": {
     description: "Peignoir 100% coton LPG.",
     descriptionDe: "Bademantel 100% Baumwolle LPG.",
     benefits: ["100% coton doux", "Marquage LPG brodé", "Confort optimal"],
     benefitsDe: ["100% weiche Baumwolle", "Eingesticktes LPG-Logo", "Optimaler Komfort"],
-    imageUrl: "/images/products/peignoir.jpg",
+    imageUrl: GDRIVE + "1JLYVjq0SmD-u4xxJYvxlHR8AqDHYbM5P",
   },
   "PEIGNOIR 100% COTON — XL": {
     description: "Peignoir 100% coton LPG.",
     descriptionDe: "Bademantel 100% Baumwolle LPG.",
     benefits: ["100% coton doux", "Marquage LPG brodé", "Confort optimal"],
     benefitsDe: ["100% weiche Baumwolle", "Eingesticktes LPG-Logo", "Optimaler Komfort"],
-    imageUrl: "/images/products/peignoir.jpg",
+    imageUrl: GDRIVE + "1JLYVjq0SmD-u4xxJYvxlHR8AqDHYbM5P",
   },
   "BADGE LPG": {
     description: "Badge LPG officiel pour les professionnels certifiés.",
     descriptionDe: "Offizielles LPG-Abzeichen für zertifizierte Fachleute.",
     benefits: ["Officiel LPG", "Qualité premium", "Identification professionnelle"],
     benefitsDe: ["Offizielles LPG", "Premium-Qualität", "Professionelle Kennzeichnung"],
-    imageUrl: "/images/products/badge_lpg.png",
+    imageUrl: GDRIVE + "1IUiJxuKEnqyVPPqUexbzUhUuMc9yjb5H",
   },
   "TONGS / FLIPS": {
     description: "Tongs LPG pour les clients en cabine.",
     descriptionDe: "LPG-Flip-Flops für Kabinenkunden.",
     benefits: ["Hygiénique", "Usage cabine", "Coloris blanc"],
     benefitsDe: ["Hygienisch", "Kabinengebrauch", "Weiße Farbe"],
-    imageUrl: "/images/products/tongs.jpg",
+    imageUrl: GDRIVE + "1Ani0kEerGcV3AJ2MQdtKjX5zyf-4D8yW",
+  },
+
+  // ── MARKETING ─────────────────────────────────────────────────────────────
+  "CABAS": {
+    description: "Cabas LPG.",
+    descriptionDe: "LPG Cabas-Tasche.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1JHzTeBvC8kYSMe2ZgRHc9HPQqQpzQPC8",
+  },
+  "ERGEBNISSE ALBUM INFINITY": {
+    description: "Album de résultats Infinity.",
+    descriptionDe: "Ergebnisalbum Infinity.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1LK4PScBfpH7ooQebOXuGB7Ta4NEYqa8T",
+  },
+  "FLYERS INFINITY GESICHT": {
+    description: "Flyers Infinity visage.",
+    descriptionDe: "Flyers Infinity Gesicht.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1s_zV8vIXtx0Viu0tneDNR9PrLlvcNiEO",
+  },
+  "FLYERS INFINITY KÖRPER": {
+    description: "Flyers Infinity corps.",
+    descriptionDe: "Flyers Infinity Körper.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1A32ixniigXxvHQJ8-BwDtYNroUTHFEGs",
+  },
+  "TERMINKARTE": {
+    description: "Carte de rendez-vous LPG.",
+    descriptionDe: "LPG Terminkarte.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1lueaDfEWycIPrumE27z3esBj3HqMeKFn",
+  },
+  "TROUSSE CORPS": {
+    description: "Trousse corps LPG.",
+    descriptionDe: "LPG Körpertasche.",
+    benefits: [], benefitsDe: [],
+    imageUrl: GDRIVE + "1UsXggnB8QA3TvLAQYfing3pFQs1_FHop",
   },
 };
 
@@ -697,6 +736,12 @@ const DE_ALIASES: Record<string, string> = {
   "DRAP / TUCH": "DRAP 90x195cm",
   "TONGS / FLIP FLOPS": "TONGS / FLIPS",
   "STANDARD LIEGE": "TABLE STANDARD",
+  // Marketing
+  "CABAS LPG": "CABAS",
+  "RESULTS ALBUM INFINITY": "ERGEBNISSE ALBUM INFINITY",
+  "ALBUM ERGEBNISSE INFINITY": "ERGEBNISSE ALBUM INFINITY",
+  "TERMINKARTEN": "TERMINKARTE",
+  "TROUSSE ENDERMOLOGIE CORPS": "TROUSSE CORPS",
 };
 
 for (const [en, fr] of Object.entries(DE_ALIASES)) {
