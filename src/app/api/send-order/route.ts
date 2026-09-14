@@ -7,6 +7,7 @@ interface OrderLine {
   size: string;
   qty: number;
   unitPrice: number;
+  retailPrice?: number;
   freeQty: number;
   lineTotal: number;
   description?: string;
@@ -102,8 +103,8 @@ function buildHtml(payload: OrderPayload): string {
     return `
     <tr style="border-bottom:1px solid #f0ebe9">
       <td style="padding:7px 8px;font-size:11px;color:#999">${l.ref}</td>
-      <td style="padding:7px 8px;font-size:13px">${l.name}${detail ? ` <span style="color:#bba8a1;font-size:11px">(${detail})</span>` : ""}${descHtml}</td>
-      <td style="padding:7px 8px;font-size:12px;text-align:center">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty}</span>` : ""}</td>
+      <td style="padding:7px 8px;font-size:13px">${l.name}${detail ? ` <span style="color:#bba8a1;font-size:11px">(${detail})</span>` : ""}${l.type === "revente" && l.retailPrice ? `<br><span style="font-size:11px;color:#bba8a1">Empf. VK: ${eur(l.retailPrice)}</span>` : ""}${descHtml}</td>
+      <td style="padding:7px 8px;font-size:12px;text-align:center">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty} gratis</span>` : ""}</td>
       <td style="padding:7px 8px;font-size:12px;text-align:right">${eur(l.unitPrice)}</td>
       <td style="padding:7px 8px;font-size:13px;font-weight:600;text-align:right">${eur(l.lineTotal)}</td>
     </tr>`;
@@ -168,8 +169,8 @@ function buildConfirmHtml(payload: OrderPayload): string {
 
   const rows = orderLines.map((l) => `
     <tr>
-      <td style="padding:8px;font-size:13px;color:#2d2020;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.name}${l.size ? ` <span style="color:#bba8a1;font-size:11px">(${l.size})</span>` : ""}${l.type === "offre" && l.gift ? `<br><span style="font-size:11px;color:#d598aa">🎁 ${l.gift}</span>` : ""}</td>
-      <td style="padding:8px;font-size:12px;text-align:center;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty}</span>` : ""}</td>
+      <td style="padding:8px;font-size:13px;color:#2d2020;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.name}${l.size ? ` <span style="color:#bba8a1;font-size:11px">(${l.size})</span>` : ""}${l.type === "revente" && l.retailPrice ? `<br><span style="font-size:11px;color:#bba8a1;font-family:Arial,sans-serif">Empf. VK: ${eur(l.retailPrice)}</span>` : ""}${l.type === "offre" && l.gift ? `<br><span style="font-size:11px;color:#d598aa">🎁 ${l.gift}</span>` : ""}</td>
+      <td style="padding:8px;font-size:12px;text-align:center;border-bottom:1px solid #f0ebe9;font-family:Arial,sans-serif">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty} gratis</span>` : ""}</td>
       <td style="padding:8px;font-size:12px;text-align:right;border-bottom:1px solid #f0ebe9;white-space:nowrap;font-family:Arial,sans-serif">${eur(l.unitPrice)}</td>
       <td style="padding:8px;font-size:13px;font-weight:700;text-align:right;border-bottom:1px solid #f0ebe9;white-space:nowrap;font-family:Arial,sans-serif">${eur(l.lineTotal)}</td>
     </tr>`).join("");

@@ -123,6 +123,7 @@ export default function OrderModal({
           size: p.size,
           qty,
           unitPrice: p.price,
+          retailPrice: p.retailPrice,
           freeQty: free,
           lineTotal: paid * p.price,
         };
@@ -192,7 +193,10 @@ export default function OrderModal({
                       <span className="flex-1 pr-2" style={{ color: "#2d2020" }}>
                         {p.nameDe}
                         {p.size ? ` (${p.size})` : ""} ×{qty}
-                        {free > 0 && <span style={{ color: "#d598aa" }}> +{free}</span>}
+                        {free > 0 && <span style={{ color: "#d598aa" }}> +{free} gratis</span>}
+                        {p.type === "revente" && p.retailPrice && (
+                          <span className="block" style={{ color: "#bba8a1" }}>Empf. VK: {formatEUR(p.retailPrice)}</span>
+                        )}
                       </span>
                       <span className="font-semibold">{formatEUR(paid * p.price)}</span>
                     </div>
@@ -261,10 +265,13 @@ export default function OrderModal({
                 const { paid, free } = p.promoEligible ? promoFn(qty) : { paid: qty, free: 0 };
                 return (
                   <div key={p.ref} className="flex justify-between text-xs">
-                    <span className="flex-1 truncate pr-2">
+                    <span className="flex-1 pr-2">
                       {p.nameDe}
                       {p.size ? ` (${p.size})` : ""} ×{qty}
-                      {free > 0 && <span style={{ color: "#d598aa" }}> +{free}</span>}
+                      {free > 0 && <span style={{ color: "#d598aa" }}> +{free} gratis</span>}
+                      {p.type === "revente" && p.retailPrice && (
+                        <span className="block" style={{ color: "#bba8a1" }}>Empf. VK: {formatEUR(p.retailPrice)}</span>
+                      )}
                     </span>
                     <span className="font-semibold">{formatEUR(paid * p.price)}</span>
                   </div>
