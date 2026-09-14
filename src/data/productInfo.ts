@@ -378,14 +378,14 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     descriptionDe: "Große LPG Tragetasche aus Naturstoff mit markierten Griffen.",
     benefits: ["Format XXL pratique", "Toile résistante", "Design LPG exclusif"],
     benefitsDe: ["Praktisches XXL-Format", "Robuster Stoff", "Exklusives LPG-Design"],
-    imageUrl: "/images/products/cabas_lpg.png",
+    imageUrl: GDRIVE + "1JHzTeBvC8kYSMe2ZgRHc9HPQqQpzQPC8",
   },
   "TROUSSE CORPS": {
     description: "Trousse de toilette en tissu éponge avec logo LPG.",
     descriptionDe: "Kulturtasche aus Frotteestoff mit LPG-Logo.",
     benefits: ["Tissu éponge doux", "Format compact", "Idéale pour les voyages"],
     benefitsDe: ["Weiches Frotteematerial", "Kompaktes Format", "Ideal für Reisen"],
-    imageUrl: "/images/products/trousse_corps.png",
+    imageUrl: GDRIVE + "1UsXggnB8QA3TvLAQYfing3pFQs1_FHop",
   },
   "NUTRI-BOX LPG": {
     description: "Coffret organisateur pour compléments alimentaires LPG.",
@@ -633,12 +633,7 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
   },
 
   // ── MARKETING ─────────────────────────────────────────────────────────────
-  "CABAS": {
-    description: "Cabas LPG.",
-    descriptionDe: "LPG Cabas-Tasche.",
-    benefits: [], benefitsDe: [],
-    imageUrl: GDRIVE + "1JHzTeBvC8kYSMe2ZgRHc9HPQqQpzQPC8",
-  },
+
   "ERGEBNISSE ALBUM INFINITY": {
     description: "Album de résultats Infinity.",
     descriptionDe: "Ergebnisalbum Infinity.",
@@ -663,12 +658,7 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
     benefits: [], benefitsDe: [],
     imageUrl: GDRIVE + "1lueaDfEWycIPrumE27z3esBj3HqMeKFn",
   },
-  "TROUSSE CORPS": {
-    description: "Trousse corps LPG.",
-    descriptionDe: "LPG Körpertasche.",
-    benefits: [], benefitsDe: [],
-    imageUrl: GDRIVE + "1UsXggnB8QA3TvLAQYfing3pFQs1_FHop",
-  },
+
 };
 
 // Aliases for DE project (English product names → same data as French keys)
@@ -737,7 +727,7 @@ const DE_ALIASES: Record<string, string> = {
   "TONGS / FLIP FLOPS": "TONGS / FLIPS",
   "STANDARD LIEGE": "TABLE STANDARD",
   // Marketing
-  "CABAS LPG": "CABAS",
+  "CABAS": "CABAS LPG",
   "RESULTS ALBUM INFINITY": "ERGEBNISSE ALBUM INFINITY",
   "ALBUM ERGEBNISSE INFINITY": "ERGEBNISSE ALBUM INFINITY",
   "TERMINKARTEN": "TERMINKARTE",
