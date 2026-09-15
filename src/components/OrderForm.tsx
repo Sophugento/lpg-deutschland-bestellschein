@@ -8,6 +8,7 @@ import CategorySection from "@/components/CategorySection";
 import OfferRow from "@/components/OfferRow";
 import OrderBar from "@/components/OrderBar";
 import OrderModal from "@/components/OrderModal";
+import PriceListModal from "@/components/PriceListModal";
 
 interface Props {
   catalog: Catalog;
@@ -20,6 +21,7 @@ export default function OrderForm({ catalog }: Props) {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [offerQtys, setOfferQtys] = useState<Record<string, number>>({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [priceListOpen, setPriceListOpen] = useState(false);
 
   const t = T;
 
@@ -73,6 +75,21 @@ export default function OrderForm({ catalog }: Props) {
             {t.title}
           </h1>
         </div>
+        <button
+          onClick={() => setPriceListOpen(true)}
+          title="Preisliste anzeigen"
+          className="p-2 rounded-lg transition-colors"
+          style={{ color: "#bba8a1" }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6" />
+            <line x1="8" y1="12" x2="21" y2="12" />
+            <line x1="8" y1="18" x2="21" y2="18" />
+            <line x1="3" y1="6" x2="3.01" y2="6" />
+            <line x1="3" y1="12" x2="3.01" y2="12" />
+            <line x1="3" y1="18" x2="3.01" y2="18" />
+          </svg>
+        </button>
       </header>
 
       {/* Règles */}
@@ -139,6 +156,10 @@ export default function OrderForm({ catalog }: Props) {
       </div>
 
       <OrderBar subtotal={subtotal} onSubmit={() => setModalOpen(true)} t={t} />
+
+      {priceListOpen && (
+        <PriceListModal products={products} onClose={() => setPriceListOpen(false)} />
+      )}
 
       {modalOpen && (
         <OrderModal
