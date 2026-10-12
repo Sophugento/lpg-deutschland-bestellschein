@@ -8,7 +8,7 @@ interface GvizTable {
   rows: ({ c: ({ v: unknown; f?: string } | null)[] } | null)[];
 }
 
-async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]> {
+export async function fetchSheet(sheetName: string): Promise<Record<string, unknown>[]> {
   if (!SHEET_ID) return [];
   // headers=1 forces gviz to use row 1 as header — avoids contaminated label bug
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&headers=1&sheet=${encodeURIComponent(sheetName)}`;
