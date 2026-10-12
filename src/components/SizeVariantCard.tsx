@@ -108,6 +108,11 @@ export default function SizeVariantCard({
                   </span>
                   <QuantitySelector value={qty} onChange={(v) => onChange(p.ref, v)} disabled={isBlocked(p.status)} />
                 </div>
+                {!!p.retailPrice && (
+                  <p className="text-[10px] mt-0.5 pl-16" style={{ color: "#bba8a1" }}>
+                    {t.prixVente} {formatEUR(p.retailPrice)}
+                  </p>
+                )}
                 {qty > 0 && (
                   <p className="text-xs font-semibold mt-1 pl-16" style={{ color: "#d598aa" }}>
                     = {formatEUR(qty * p.price)}
