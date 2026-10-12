@@ -194,7 +194,7 @@ export default function OrderModal({
                         {p.nameDe}
                         {p.size ? ` (${p.size})` : ""} ×{qty}
                         {free > 0 && <span style={{ color: "#d598aa" }}> +{free} gratis</span>}
-                        {p.type === "revente" && p.retailPrice && (
+                        {!!p.retailPrice && (
                           <span className="block" style={{ color: "#bba8a1" }}>Empf. VK: {formatEUR(p.retailPrice)}</span>
                         )}
                       </span>
@@ -269,7 +269,7 @@ export default function OrderModal({
                       {p.nameDe}
                       {p.size ? ` (${p.size})` : ""} ×{qty}
                       {free > 0 && <span style={{ color: "#d598aa" }}> +{free} gratis</span>}
-                      {p.type === "revente" && p.retailPrice && (
+                      {!!p.retailPrice && (
                         <span className="block" style={{ color: "#bba8a1" }}>Empf. VK: {formatEUR(p.retailPrice)}</span>
                       )}
                     </span>
