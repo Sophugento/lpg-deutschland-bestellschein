@@ -61,58 +61,36 @@ export async function getCatalog(): Promise<Catalog> {
       fetchSheet("Descriptions & Images"),
     ]);
 
-    // Build override map from sheet rows (ref → updatable fields only).
-    // PRODUCTS static list is always the base — the sheet only patches what changed.
-    const overrides = new Map<string, Partial<Product>>();
-    prodRows
+    // The sheet is the single source of truth: one product per sheet row, in sheet order.
+    // Static data only supplies fields the sheet lacks (infoKey, promo fallback).
+    const staticByRef = new Map(PRODUCTS.map((p) => [p.ref.split("-")[0], p]));
+    const refCount = new Map<string, number>();
+    const products: Product[] = prodRows
       .filter((r) => str(r["Réf."]) && !str(r["Réf."]).startsWith("📌"))
-      .forEach((r) => {
-        const ref = str(r["Réf."]);
-        const patch: Partial<Product> = {};
-        // Support both "Nom" (single column) and separate "Nom FR"/"Nom DE" columns
-        const nomFr = str(r["Nom FR"] ?? r["Nom"]);
-        const nomDe = str(r["Nom DE"] ?? r["Nom"]);
-        if (nomDe)  patch.nameDe = nomDe;
-        if (nomFr)  patch.nameFr = nomFr;
-        if (str(r["Type"]))              patch.type = str(r["Type"]) as Product["type"];
-        if (str(r["Contenant"]))         patch.size = str(r["Contenant"]);
-        if (num(r["Prix EUR (HT)"]))     patch.price = num(r["Prix EUR (HT)"]);
-        if (num(r["Prix vente EUR"]))    patch.retailPrice = num(r["Prix vente EUR"]);
-        if (str(r["Catégorie"]))         patch.category = str(r["Catégorie"]);
-        if (str(r["Sous-catégorie"]))    patch.subcategory = str(r["Sous-catégorie"]);
-        const status = str(r["Statut"]).toLowerCase();
-        if (status) patch.status = status as Product["status"];
-        overrides.set(ref, patch);
-      });
-
-    // 1. Apply sheet overrides to all static products
-    const staticRefs = new Set(PRODUCTS.map((p) => p.ref));
-    const products: Product[] = PRODUCTS.map((p) => {
-      const patch = overrides.get(p.ref);
-      return patch ? { ...p, ...patch } : p;
-    });
-
-    // 2. Append new products from the sheet that don't exist in static data
-    prodRows
-      .filter((r) => str(r["Réf."]) && !str(r["Réf."]).startsWith("📌") && !staticRefs.has(str(r["Réf."])))
-      .forEach((r) => {
-        const ref = str(r["Réf."]);
-        // Skip if we'd create a duplicate (same ref already added)
-        if (products.some((p) => p.ref === ref)) return;
-        products.push({
+      .map((r) => {
+        const baseRef = str(r["Réf."]);
+        const n = (refCount.get(baseRef) || 0) + 1;
+        refCount.set(baseRef, n);
+        // LPG reuses some refs for different products; keep each row with a unique key
+        const ref = n === 1 ? baseRef : `${baseRef}-${n}`;
+        const base = n === 1 ? staticByRef.get(baseRef) : undefined;
+        const promo = str(r["Promo éligible"]).toLowerCase();
+        return {
           ref,
           nameFr: str(r["Nom FR"] ?? r["Nom"]),
           nameDe: str(r["Nom DE"] ?? r["Nom"]),
-          type: str(r["Type"]) as Product["type"] || "professionnel",
+          infoKey: base?.infoKey,
+          type: (str(r["Type"]) || "professionnel") as Product["type"],
           size: str(r["Contenant"]),
           price: num(r["Prix EUR (HT)"]),
           retailPrice: num(r["Prix vente EUR"]) || undefined,
           category: str(r["Catégorie"]),
           subcategory: str(r["Sous-catégorie"]),
-          promoEligible: false,
+          promoEligible: promo ? promo === "true" : base?.promoEligible ?? false,
           status: (str(r["Statut"]).toLowerCase() || undefined) as Product["status"],
-        });
+        };
       });
+    if (products.length === 0) throw new Error("Sheet 'Produkte' returned no products");
 
     const offers: Offer[] = offerRows
       .filter((r) => str(r["ID"]) && !str(r["ID"]).startsWith("📌"))
@@ -157,6 +135,6 @@ export async function getCatalog(): Promise<Catalog> {
     return { products: activeProducts, offers, productInfo };
   } catch (err) {
     console.error("Google Sheets unavailable, using static data:", err);
-    return { products: PRODUCTS, offers: OFFERS, productInfo: PRODUCT_INFO };
+    return { products: PRODUCTS.filter((p) => p.status !== "inactif"), offers: OFFERS, productInfo: PRODUCT_INFO };
   }
 }

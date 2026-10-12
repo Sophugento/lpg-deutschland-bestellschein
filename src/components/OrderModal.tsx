@@ -117,7 +117,7 @@ export default function OrderModal({
         const promoFn = p.type === "professionnel" ? calcPromoCabine : calcPromoRevente;
         const { paid, free } = p.promoEligible ? promoFn(qty) : { paid: qty, free: 0 };
         return {
-          ref: p.ref,
+          ref: p.ref.split("-")[0],
           name: p.nameDe,
           type: p.type,
           size: p.size,
