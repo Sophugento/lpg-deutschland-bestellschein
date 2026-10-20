@@ -662,7 +662,7 @@ export const PRODUCT_INFO: Record<string, ProductInfo> = {
 };
 
 // Aliases for DE project (English product names → same data as French keys)
-const DE_ALIASES: Record<string, string> = {
+export const DE_ALIASES: Record<string, string> = {
   "BODY SHAPING GEL": "GEL LIPORÉDUCTEUR",
   "BODY SHAPING CREAM": "CRÈME LIPORÉDUCTEUR",
   "ANTI-CELLULITE CREAM-IN-GEL": "GEL-CRÈME ANTI CELLULITE",
