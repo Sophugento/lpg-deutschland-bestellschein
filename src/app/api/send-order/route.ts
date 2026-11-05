@@ -12,6 +12,8 @@ interface OrderLine {
   lineTotal: number;
   description?: string;
   gift?: string;
+  refsPaid?: string;
+  refsFree?: string;
 }
 
 interface Address {
@@ -100,10 +102,14 @@ function buildHtml(payload: OrderPayload): string {
     const descHtml = l.type === "offre" && (l.description || l.gift)
       ? `${l.description ? `<br><span style="font-size:11px;color:#bba8a1;font-weight:400">${l.description}</span>` : ""}${l.gift ? `<br><span style="font-size:11px;color:#d598aa;font-weight:400">🎁 ${l.gift}</span>` : ""}`
       : "";
+    // Internal only: article refs the order desk enters for this offer
+    const refsHtml = l.type === "offre" && (l.refsPaid || l.refsFree)
+      ? `<div style="margin-top:6px;padding:6px 8px;background:#fff8e6;border-left:3px solid #f5c542;font-size:11px;color:#5c4400;font-weight:400">${l.refsPaid ? `<strong>Ref zu bezahlen:</strong> ${l.refsPaid}` : ""}${l.refsPaid && l.refsFree ? "<br>" : ""}${l.refsFree ? `<strong>Ref kostenlos:</strong> ${l.refsFree}` : ""}</div>`
+      : "";
     return `
     <tr style="border-bottom:1px solid #f0ebe9">
       <td style="padding:7px 8px;font-size:11px;color:#999">${l.ref}</td>
-      <td style="padding:7px 8px;font-size:13px">${l.name}${detail ? ` <span style="color:#bba8a1;font-size:11px">(${detail})</span>` : ""}${l.retailPrice ?`<br><span style="font-size:11px;color:#bba8a1">Empf. VK: ${eur(l.retailPrice)}</span>` : ""}${descHtml}</td>
+      <td style="padding:7px 8px;font-size:13px">${l.name}${detail ? ` <span style="color:#bba8a1;font-size:11px">(${detail})</span>` : ""}${l.retailPrice ?`<br><span style="font-size:11px;color:#bba8a1">Empf. VK: ${eur(l.retailPrice)}</span>` : ""}${descHtml}${refsHtml}</td>
       <td style="padding:7px 8px;font-size:12px;text-align:center">${l.qty}${l.freeQty > 0 ? ` <span style="color:#d598aa">+${l.freeQty} gratis</span>` : ""}</td>
       <td style="padding:7px 8px;font-size:12px;text-align:right">${eur(l.unitPrice)}</td>
       <td style="padding:7px 8px;font-size:13px;font-weight:600;text-align:right">${eur(l.lineTotal)}</td>

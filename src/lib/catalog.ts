@@ -152,6 +152,8 @@ export async function getCatalog(): Promise<Catalog> {
         price: num(r["Prix EUR (HT)"]),
         description: str(r["Description"]),
         gift: str(r["Cadeau inclus"]),
+        refsPaid: str(r["Ref zu bezahlen"]),
+        refsFree: str(r["Ref kostenlos"]),
       }));
 
     const productInfo: Record<string, ProductInfo> = { ...PRODUCT_INFO };

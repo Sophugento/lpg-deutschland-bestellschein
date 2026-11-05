@@ -14,6 +14,8 @@ export interface Offer {
   price: number;
   description: string;
   gift: string;
+  refsPaid?: string;
+  refsFree?: string;
 }
 
 export interface Product {
