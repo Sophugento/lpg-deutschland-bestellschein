@@ -22,6 +22,7 @@ export default function OrderForm({ catalog }: Props) {
   const [offerQtys, setOfferQtys] = useState<Record<string, number>>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [priceListOpen, setPriceListOpen] = useState(false);
+  const [promoCode, setPromoCode] = useState<string | null>(null);
 
   const t = T;
 
@@ -155,7 +156,13 @@ export default function OrderForm({ catalog }: Props) {
         ))}
       </div>
 
-      <OrderBar subtotal={subtotal} onSubmit={() => setModalOpen(true)} t={t} />
+      <OrderBar
+        subtotal={subtotal}
+        onSubmit={() => setModalOpen(true)}
+        t={t}
+        promoCode={promoCode}
+        onPromoChange={setPromoCode}
+      />
 
       {priceListOpen && (
         <PriceListModal products={products} onClose={() => setPriceListOpen(false)} />
@@ -164,12 +171,13 @@ export default function OrderForm({ catalog }: Props) {
       {modalOpen && (
         <OrderModal
           onClose={() => setModalOpen(false)}
-          onSuccess={() => { setModalOpen(false); setQuantities({}); setOfferQtys({}); }}
+          onSuccess={() => { setModalOpen(false); setQuantities({}); setOfferQtys({}); setPromoCode(null); }}
           products={products}
           offers={offers}
           quantities={quantities}
           offerQtys={offerQtys}
           subtotal={subtotal}
+          promoCode={promoCode}
           t={t}
           lang={lang}
         />

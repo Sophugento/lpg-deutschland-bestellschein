@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isValidPromo, normalizePromo } from "@/lib/promo";
 
 interface OrderLine {
   ref: string;
@@ -43,6 +44,7 @@ interface OrderPayload {
   subtotal: number;
   shipping: number;
   total: number;
+  promoCode?: string | null;
 }
 
 function eur(n: number) {
@@ -50,7 +52,7 @@ function eur(n: number) {
 }
 
 function buildHtml(payload: OrderPayload): string {
-  const { contact, deliveryAddress, orderLines, subtotal, shipping, total } = payload;
+  const { contact, deliveryAddress, orderLines, subtotal, shipping, total, promoCode } = payload;
   const date = new Date().toLocaleDateString("de-DE", {
     day: "2-digit",
     month: "2-digit",
@@ -153,6 +155,7 @@ function buildHtml(payload: OrderPayload): string {
       <table style="width:100%;border-collapse:collapse;margin-top:16px">
         <tr><td style="padding:5px 0;font-size:13px;color:#666">${labels.subtotal}</td><td style="font-size:13px;text-align:right">${eur(subtotal)}</td></tr>
         <tr><td style="padding:5px 0;font-size:13px;color:#666">${labels.shipping}</td><td style="font-size:13px;text-align:right">${shipping === 0 ? labels.shippingFree : eur(shipping)}</td></tr>
+        ${promoCode ? `<tr><td colspan="2" style="padding:6px 8px;font-size:12px;background:#fff8e6;border-left:3px solid #f5c542;color:#5c4400"><strong>Promo-Code ${promoCode}</strong> — kein Mindestbestellwert, Porto gratis</td></tr>` : ""}
         <tr><td style="padding:10px 0 4px;font-size:16px;font-weight:700;border-top:2px solid #ded5d1">${labels.grandTotal}</td><td style="padding:10px 0 4px;font-size:16px;font-weight:700;text-align:right;border-top:2px solid #ded5d1;color:#d598aa">${eur(total)}</td></tr>
         <tr><td style="padding:3px 0;font-size:11px;color:#bba8a1">${labels.totalTTC}</td><td style="font-size:11px;text-align:right;color:#bba8a1">${eur(total * 1.19)}</td></tr>
       </table>
@@ -268,6 +271,14 @@ function buildConfirmHtml(payload: OrderPayload): string {
 
 export async function POST(req: NextRequest) {
   const payload: OrderPayload = await req.json();
+  // Never trust the client: only a valid code waives shipping
+  if (isValidPromo(payload.promoCode)) {
+    payload.promoCode = normalizePromo(payload.promoCode);
+    payload.shipping = 0;
+    payload.total = payload.subtotal;
+  } else {
+    payload.promoCode = null;
+  }
   const { contact, orderLines } = payload;
 
   if (!contact.email || !contact.firstName || orderLines.length === 0) {

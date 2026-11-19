@@ -65,6 +65,12 @@ export const T = {
   btnStart: "Auswahl beginnen",
   btnMinNotReached: (missing: string) => `Mindestbestellwert nicht erreicht (noch ${missing})`,
   btnSend: "Bestellung senden →",
+  promoLink: "Promo-Code eingeben",
+  promoPlaceholder: "Promo-Code",
+  promoApply: "OK",
+  promoInvalid: "Ungültiger Code",
+  promoActive: (code: string) => `Promo-Code ${code}: kein Mindestbestellwert, Porto gratis`,
+  promoRemove: "Entfernen",
 
   modalTitle: "Bestellung abschliessen",
   coordTitle: "Ihre Kontaktdaten",

@@ -34,6 +34,7 @@ interface Props {
   quantities: Record<string, number>;
   offerQtys: Record<string, number>;
   subtotal: number;
+  promoCode: string | null;
   t: T;
   lang: "de";
 }
@@ -48,6 +49,7 @@ export default function OrderModal({
   quantities,
   offerQtys,
   subtotal,
+  promoCode,
   t,
 }: Props) {
   const [c, setC] = useState<ContactInfo>({
@@ -66,7 +68,7 @@ export default function OrderModal({
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const shipping = promoCode || subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
   const total = subtotal + shipping;
   const totalTTC = total * 1.19;
 
@@ -147,6 +149,7 @@ export default function OrderModal({
           subtotal,
           shipping,
           total,
+          promoCode,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -210,6 +213,9 @@ export default function OrderModal({
                   <span style={{ color: "#bba8a1" }}>{t.shippingLabel}</span>
                   <span>{shipping === 0 ? t.shippingFree : formatEUR(SHIPPING_COST)}</span>
                 </div>
+                {promoCode && (
+                  <p className="text-[11px]" style={{ color: "#bf7585" }}>✓ {t.promoActive(promoCode)}</p>
+                )}
                 <div className="flex justify-between text-sm font-bold pt-1">
                   <span>{t.total}</span>
                   <span style={{ color: "#d598aa" }}>{formatEUR(total)}</span>
@@ -289,6 +295,9 @@ export default function OrderModal({
                 <span style={{ color: "#bba8a1" }}>{t.shippingLabel}</span>
                 <span>{shipping === 0 ? t.shippingFree : formatEUR(SHIPPING_COST)}</span>
               </div>
+              {promoCode && (
+                <p className="text-[11px]" style={{ color: "#bf7585" }}>✓ {t.promoActive(promoCode)}</p>
+              )}
               <div className="flex justify-between text-sm font-bold pt-1">
                 <span>{t.total}</span>
                 <span style={{ color: "#d598aa" }}>{formatEUR(total)}</span>
